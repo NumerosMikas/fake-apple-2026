@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apple Portugal - Lançamento 2026 | iPhone 18 Pro & Inovações</title>
+  <meta name="description" content="Landing page oficial para o lançamento e reserva dos novos iPhone 18 Pro, iPhone Duo, Apple Watch Series 12 e ecossistema Apple em Portugal." />
+  <meta property="og:title" content="Apple Portugal - Lançamento 2026" />
+  <meta property="og:description" content="Conheça a nova geração Apple 2026. Reservas abertas para Portugal com envio prioritário e garantia de 3 anos." />
+  <meta property="og:type" content="website" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            appleDark: '#0a0a0c',
+            appleCard: '#121318',
+            burgundy: {
+              400: '#e05375',
+              500: '#c5284f',
+              600: '#9d173b',
+              800: '#5c0f24',
+              900: '#380614',
+              950: '#22030b',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'system-ui', 'sans-serif'],
+            mono: ['"SF Mono"', 'Menlo', 'Monaco', 'Courier New', 'monospace']
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Apple-grade scrollbar and blur effects */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+    .glassmorphism {
+      background: rgba(18, 19, 24, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .glassmorphism-light {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0c] text-slate-100 min-h-screen transition-colors duration-300 font-sans antialiased selection:bg-rose-500 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- 1. ANNOUNCEMENT BANNER & STICKY NAVBAR -->
+  <!-- ========================================================================= -->
+  <div id="top-announcement-banner" class="bg-gradient-to-r from-rose-950 via-purple-950 to-slate-900 text-xs text-slate-200 py-2.5 px-4 text-center font-medium border-b border-white/10 relative z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+      <span class="bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full font-bold">
+        Lançamento em Portugal
+      </span>
+      <span>Disponível a partir de 18/09 • Reservas abertas com entrega prioritária.</span>
+      <button onclick="openReservationModal('iphone-18-pro')" class="underline font-semibold text-rose-300 hover:text-white transition inline-flex items-center gap-1 cursor-pointer">
+        Reservar Agora &rarr;
+      </button>
+    </div>
+  </div>
+
+  <header id="main-navbar" class="sticky top-0 z-40 backdrop-blur-xl border-b border-slate-800/80 bg-[#0a0a0c]/85 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-8">
+        <a href="#" class="font-bold text-xl tracking-tight flex items-center gap-2 group">
+          <span class="text-2xl transition-transform group-hover:scale-110"></span>
+          <span class="bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-transparent">Apple</span>
+          <span class="text-xs text-rose-400 font-mono font-bold bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20">PT</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-400">
+          <a href="#hero" class="hover:text-slate-100 transition">iPhone 18 Pro</a>
+          <a href="#personas" class="hover:text-slate-100 transition">Para Quem É</a>
+          <a href="#features" class="hover:text-slate-100 transition">Inovações</a>
+          <a href="#agendamento" class="hover:text-slate-100 transition flex items-center gap-1.5 text-rose-300 hover:text-rose-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span>
+            Demonstração Cal.com
+          </a>
+          <a href="#faq" class="hover:text-slate-100 transition">Perguntas Frequentes</a>
+        </nav>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-4">
+        <!-- Dark / Light Mode Toggle Button -->
+        <button 
+          id="theme-toggle" 
+          onclick="toggleTheme()" 
+          class="p-2.5 rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 hover:text-white hover:bg-slate-700/80 transition cursor-pointer"
+          title="Alternar Modo Escuro / Claro"
+          aria-label="Alternar Modo"
+        >
+          <!-- Sun Icon -->
+          <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <!-- Moon Icon -->
+          <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+
+        <!-- CTA Button -->
+        <button 
+          onclick="openReservationModal('iphone-18-pro')" 
+          class="bg-slate-100 text-slate-950 hover:bg-white font-semibold text-sm px-5 py-2.5 rounded-full transition shadow-lg shadow-white/5 hover:scale-105 active:scale-95 cursor-pointer"
+        >
+          Reservar Agora
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 2. HERO SECTION -->
+  <!-- ========================================================================= -->
+  <section id="hero" class="relative pt-12 pb-24 md:pt-20 md:pb-32 overflow-hidden">
+    <!-- Ambient Radial Lighting -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-rose-900/35 via-purple-900/25 to-transparent blur-[140px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+      
+      <!-- Launch Microcopy Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 text-xs font-semibold mb-6">
+        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        Disponível a 18/09 • Reservas Abertas
+      </div>
+
+      <!-- Headline: Max 10 words -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.08] mb-6">
+        Um Pro muito à frente. <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-rose-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent">
+          Engenharia Sem Limites.
+        </span>
+      </h1>
+
+      <!-- Subheadline: Max 25 words -->
+      <p class="text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
+        Concebido para elevar a sua produtividade, criatividade e saúde com o maior salto de desempenho e inovação alguma vez criado.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <button 
+          onclick="openReservationModal('iphone-18-pro')" 
+          class="w-full sm:w-auto px-9 py-4 rounded-full bg-slate-100 text-slate-950 font-bold text-base hover:bg-white transition transform hover:scale-105 shadow-2xl shadow-rose-950/40 cursor-pointer flex items-center justify-center gap-2"
+        >
+          <span>Reservar Agora — Desde 18/09</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+        <button 
+          onclick="openPricingModal()" 
+          class="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-base border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition cursor-pointer"
+        >
+          Ver Preços e Modelos
+        </button>
+      </div>
+
+      <!-- High-Tech Product Display Card: iPhone 18 Pro - Titanium Burgundy -->
+      <div class="relative max-w-5xl mx-auto rounded-3xl border border-slate-800/80 p-4 md:p-8 shadow-2xl backdrop-blur-2xl bg-slate-900/40">
+        <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-slate-950 via-[#130713] to-[#0c040d] border border-white/10 py-12 px-6 md:px-12 text-left flex flex-col md:flex-row items-center justify-between gap-10">
+          
+          <div class="max-w-md space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[11px] font-mono uppercase tracking-wider font-bold">
+              Cor de Estreia 2026
+            </div>
+            <h3 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
+              iPhone 18 Pro
+            </h3>
+            <p class="text-rose-300 font-medium text-sm">
+              Acabamento de Luxo: Titanium Burgundy Deep
+            </p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Forjado em titânio de grau aeroespacial de 5.ª geração com acabamento térmico por microjateamento. Apresenta o revolucionário processador A19 Pro com motor neural de 2nm e lente periscópica 48 MP com alcance estendido.
+            </p>
+            
+            <div class="pt-3 flex flex-wrap gap-2 text-xs font-mono text-slate-300">
+              <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                Chip A19 Pro 2nm
+              </span>
+              <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                Câmara 48MP 8K ProRes
+              </span>
+              <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Bateria +5h Autonomia
+              </span>
+            </div>
+          </div>
+
+          <!-- Phone Visual Representation Mockup -->
+          <div class="w-full md:w-80 rounded-2xl bg-gradient-to-tr from-rose-950 via-burgundy-900 to-purple-950 p-6 flex flex-col justify-between border border-rose-500/40 relative overflow-hidden shadow-2xl group transition hover:scale-[1.02]">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 pointer-events-none"></div>
+            
+            <div class="flex justify-between items-start z-10 mb-8">
+              <span class="text-xs font-bold uppercase tracking-widest text-rose-200">Titanium Burgundy</span>
+              <span class="text-xs bg-rose-500/30 text-rose-100 px-2.5 py-0.5 rounded-full border border-rose-400/40 font-mono font-bold">18/09</span>
+            </div>
+
+            <!-- Stylized Phone Camera Island -->
+            <div class="z-10 text-center my-6">
+              <div class="w-24 h-24 mx-auto rounded-3xl bg-black/60 border border-white/20 p-2.5 grid grid-cols-2 gap-2 shadow-inner">
+                <div class="w-7 h-7 rounded-full bg-slate-900 border border-rose-500/50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-rose-400/80"></div>
+                </div>
+                <div class="w-7 h-7 rounded-full bg-slate-900 border border-rose-500/50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-purple-400/80"></div>
+                </div>
+                <div class="w-7 h-7 rounded-full bg-slate-900 border border-rose-500/50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-indigo-400/80"></div>
+                </div>
+                <div class="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center text-[8px] font-mono text-rose-300 font-bold">
+                  LiDAR
+                </div>
+              </div>
+            </div>
+
+            <div class="z-10 mt-auto">
+              <p class="text-xl font-bold text-white tracking-tight">iPhone 18 Pro</p>
+              <p class="text-xs text-rose-200 mb-4">Desde 1.349 € ou 44,95 €/mês sem juros</p>
+              <button 
+                onclick="openReservationModal('iphone-18-pro')" 
+                class="w-full py-2.5 px-4 rounded-xl bg-white text-slate-950 font-bold text-xs hover:bg-slate-200 transition cursor-pointer text-center"
+              >
+                Configurar e Reservar &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. TARGET AUDIENCE (3 PERSONAS) -->
+  <!-- ========================================================================= -->
+  <section id="personas" class="py-20 border-t border-slate-800/80 bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-rose-500 mb-2 font-bold">
+          Para Quem Foi Desenhado
+        </h2>
+        <p class="text-3xl md:text-4xl font-extrabold tracking-tight">
+          Criado para quem não aceita limitações.
+        </p>
+        <p class="text-slate-400 mt-3 text-base">
+          Identifique o perfil de inovação que melhor responde às suas necessidades diárias.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Persona 1: Tech Leader & Developer -->
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
+          <div>
+            <div class="flex justify-between items-center mb-6">
+              <span class="text-xs font-mono uppercase px-3 py-1 rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 font-semibold">
+                Power Users
+              </span>
+              <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold mb-1">Líder Tecnológico & Developer</h3>
+            <p class="text-xs text-rose-400 font-medium mb-6">Desempenho Sem Compromissos</p>
+
+            <div class="space-y-4 text-sm">
+              <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-900/30">
+                <p class="text-xs font-semibold text-rose-300 uppercase tracking-wider mb-1">Frustração Atual</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  Desempenho reduzido e aquecimento (thermal throttling) ao compilar modelos pesados de IA ou multitarefa intensiva em mobilidade.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/30">
+                <p class="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-1">Resultado Desejado</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  Velocidade instantânea M5 e A19 Pro, dissipação térmica em câmara de vapor e arquitetura pronta para LLMs locais.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Solução recomendada:</span>
+            <button onclick="openReservationModal('iphone-18-pro')" class="font-semibold text-slate-200 hover:text-rose-400 transition cursor-pointer">
+              iPhone 18 Pro & Mac M5 &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Persona 2: Content Creator & Filmmaker -->
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
+          <div>
+            <div class="flex justify-between items-center mb-6">
+              <span class="text-xs font-mono uppercase px-3 py-1 rounded-full border border-purple-700 bg-purple-900/30 text-purple-300 font-semibold">
+                Criativos
+              </span>
+              <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold mb-1">Criador de Conteúdo & Cineasta</h3>
+            <p class="text-xs text-purple-400 font-medium mb-6">Estúdio de Cinema de Bolso</p>
+
+            <div class="space-y-4 text-sm">
+              <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-900/30">
+                <p class="text-xs font-semibold text-rose-300 uppercase tracking-wider mb-1">Frustração Atual</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  Necessidade de transportar câmaras volumosas, perda de tempo na importação de ficheiros RAW e limites de bateria em rodagens externas.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/30">
+                <p class="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-1">Resultado Desejado</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  Gravação nativa ProRes 8K com controlo de cor ACES, transferência instantânea via Thunderbolt e sincronização direta no Final Cut Pro.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Solução recomendada:</span>
+            <button onclick="openReservationModal('iphone-18-pro')" class="font-semibold text-slate-200 hover:text-purple-400 transition cursor-pointer">
+              iPhone 18 Pro 1 TB &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Persona 3: Performance & Health Enthusiast -->
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
+          <div>
+            <div class="flex justify-between items-center mb-6">
+              <span class="text-xs font-mono uppercase px-3 py-1 rounded-full border border-emerald-700 bg-emerald-900/30 text-emerald-300 font-semibold">
+                Performance
+              </span>
+              <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold mb-1">Atleta & Profissional de Saúde</h3>
+            <p class="text-xs text-emerald-400 font-medium mb-6">Telemetria e Precisão Absoluta</p>
+
+            <div class="space-y-4 text-sm">
+              <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-900/30">
+                <p class="text-xs font-semibold text-rose-300 uppercase tracking-wider mb-1">Frustração Atual</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  Falta de rigor científico nos sensores de frequência cardíaca de wearables convencionais e ansiedade por baterias fracas em treinos longos.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/30">
+                <p class="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-1">Resultado Desejado</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  Telemetria validada por estudos clínicos (99,4% de correlação médica), sensor de hidratação contínua e autonomia até 72 horas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Solução recomendada:</span>
+            <button onclick="openReservationModal('watch-series-12')" class="font-semibold text-slate-200 hover:text-emerald-400 transition cursor-pointer">
+              Apple Watch Series 12 &rarr;
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. BENTO GRID FEATURES (ECOSYSTEM) -->
+  <!-- ========================================================================= -->
+  <section id="features" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-400 mb-2 font-bold">
+          Ecossistema de Inovação
+        </h2>
+        <p class="text-3xl md:text-5xl font-extrabold tracking-tight">
+          O alinhamento perfeito de hardware e poder.
+        </p>
+        <p class="text-slate-400 mt-4 text-base">
+          Descubra os 5 pilares do novo ecossistema Apple para 2026.
+        </p>
+      </div>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Tile 1: iPhone 18 Pro (Large 2 Columns) -->
+        <div onclick="openReservationModal('iphone-18-pro')" class="md:col-span-2 rounded-3xl border border-slate-800 bg-slate-900/50 p-8 flex flex-col justify-between relative overflow-hidden group cursor-pointer transition hover:border-rose-500/60 hover:scale-[1.01]">
+          <div class="flex justify-between items-start mb-8">
+            <div class="p-3.5 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 group-hover:bg-rose-500/20 transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+            </div>
+            <span class="text-xs font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-full">Flagship • 18/09</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-2xl font-bold">iPhone 18 Pro</h3>
+              <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">Chip A19 Pro</span>
+            </div>
+            <p class="text-slate-400 text-sm max-w-xl mb-4 leading-relaxed">
+              Potência de estúdio no seu bolso. Desenvolvido com arquitectura de 2nm, três câmaras de 48 MP e lente periscópica 7x com estabilização mecânica de 3 eixos.
+            </p>
+            <p class="text-xs text-rose-400 font-semibold">
+              "Um Pro muito à frente." — Autonomia alargada em 5 horas e construção aeroespacial em Titanium Burgundy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tile 2: iPhone Duo -->
+        <div onclick="openReservationModal('iphone-duo')" class="rounded-3xl border border-slate-800 bg-slate-900/50 p-8 flex flex-col justify-between cursor-pointer transition hover:border-purple-500/60 hover:scale-[1.01] group">
+          <div class="flex justify-between items-start mb-8">
+            <div class="p-3.5 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 group-hover:bg-purple-500/20 transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <span class="text-xs font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-full">Reserva 16/10</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">iPhone Duo</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+              Produtividade dobrável e multitarefa contínua numa experiência de ecrã duplo flexível sem vinco perceptível.
+            </p>
+            <span class="text-xs font-mono text-purple-300">Novo formato revolucionário.</span>
+          </div>
+        </div>
+
+        <!-- Tile 3: Apple Watch Series 12 -->
+        <div onclick="openReservationModal('watch-series-12')" class="rounded-3xl border border-slate-800 bg-slate-900/50 p-8 flex flex-col justify-between cursor-pointer transition hover:border-emerald-500/60 hover:scale-[1.01] group">
+          <div class="flex justify-between items-start mb-8">
+            <div class="p-3.5 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 group-hover:bg-emerald-500/20 transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <span class="text-xs font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-full">Saúde • 18/09</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">Apple Watch Series 12</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+              Monitorização cardíaca com a maior precisão científica alguma vez testada num wearable comercial.
+            </p>
+            <span class="text-xs font-mono text-emerald-300">Validado por estudos clínicos (2026)</span>
+          </div>
+        </div>
+
+        <!-- Tile 4: MacBook Air & Pro M5 -->
+        <div onclick="openReservationModal('macbook-pro-m5')" class="rounded-3xl border border-slate-800 bg-slate-900/50 p-8 flex flex-col justify-between cursor-pointer transition hover:border-blue-500/60 hover:scale-[1.01] group">
+          <div class="flex justify-between items-start mb-8">
+            <div class="p-3.5 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <span class="text-xs font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-full">Apple Silicon</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">MacBook Air & Pro M5</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+              Velocidade relâmpago para cargas pesadas com até 22 horas de autonomia real longe da tomada.
+            </p>
+            <span class="text-xs font-mono text-blue-300">Superpoderes do chip M5, M5 Pro e Max.</span>
+          </div>
+        </div>
+
+        <!-- Tile 5: AirPods 5 -->
+        <div onclick="openReservationModal('airpods-5')" class="rounded-3xl border border-slate-800 bg-slate-900/50 p-8 flex flex-col justify-between cursor-pointer transition hover:border-amber-500/60 hover:scale-[1.01] group">
+          <div class="flex justify-between items-start mb-8">
+            <div class="p-3.5 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 group-hover:bg-amber-500/20 transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            </div>
+            <span class="text-xs font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-full">Áudio • 18/09</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">AirPods 5</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+              Imersão sonora instantânea e a magia do Cancelamento Ativo de Ruído adaptativo com arquitetura acústica renovada.
+            </p>
+            <span class="text-xs font-mono text-amber-300">Som Espacial de Próxima Geração.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Education Offer Campaign Bar -->
+      <div class="mt-8 rounded-3xl bg-gradient-to-r from-blue-900/40 via-indigo-900/30 to-slate-900 border border-blue-500/30 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-300 font-bold">
+            Campanha de Educação — Universidade
+          </span>
+          <h4 class="text-xl font-bold text-white mt-1">Ganha um cartão-oferta de 80 € a 120 €*</h4>
+          <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+            Quando compras um Mac ou iPad com descontos especiais para estudantes, docentes e investigadores qualificados em Portugal.
+          </p>
+        </div>
+        <button onclick="openReservationModal('macbook-pro-m5')" class="whitespace-nowrap px-7 py-3.5 rounded-full bg-blue-500 hover:bg-blue-400 text-white font-bold text-sm transition shadow-lg shadow-blue-500/30 cursor-pointer">
+          Aproveitar Oferta &rarr;
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 5. CAL.COM MEETING SCHEDULER SECTION -->
+  <!-- ========================================================================= -->
+  <section id="agendamento" class="py-24 border-t border-slate-800 bg-[#0d0e14] relative overflow-hidden">
+    <div class="absolute -top-32 right-1/4 w-96 h-96 bg-purple-900/20 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      
+      <!-- Section Title & Subtitle -->
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-mono uppercase tracking-wider mb-4 font-bold">
+          <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Google Calendar Sincronizado
+        </div>
+        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+          Agende uma Demonstração Personalizada
+        </h2>
+        <p class="text-slate-400 text-base md:text-lg leading-relaxed">
+          Fale com um especialista e tire todas as dúvidas sobre o ecossistema 2026. A reunião é sincronizada automaticamente no seu Google Calendar.
+        </p>
+      </div>
+
+      <!-- Cal.com Embedded Container -->
+      <div class="rounded-3xl border border-slate-800 bg-slate-900/70 p-6 md:p-8 shadow-2xl backdrop-blur-xl">
+        
+        <!-- Header Info Bar within Scheduler -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">
+              
+            </div>
+            <div>
+              <h3 class="font-bold text-base text-white">Apple Portugal • Sessão 1:1 com Especialista</h3>
+              <p class="text-xs text-slate-400 flex flex-wrap items-center gap-2">
+                <span>⏱️ 30 minutos</span>
+                <span>•</span>
+                <span>👤 Miguel D. Santos</span>
+                <span>•</span>
+                <span>📍 Google Meet sincronizado com Google Calendar</span>
+              </p>
+            </div>
+          </div>
+          
+          <!-- View Switcher Tabs -->
+          <div class="flex items-center p-1 rounded-2xl bg-slate-950/80 border border-slate-800">
+            <button 
+              id="tab-btn-cal" 
+              onclick="switchSchedulerTab('cal')" 
+              class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-rose-600 text-white font-bold text-xs shadow-md transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>Widget Cal.com Oficial</span>
+            </button>
+            <button 
+              id="tab-btn-quick" 
+              onclick="switchSchedulerTab('quick')" 
+              class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 font-semibold text-xs transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>Agendamento Expresso</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. LIVE CAL.COM EMBED WIDGET VIEW (PRIMARY) -->
+        <div id="cal-widget-view" class="w-full">
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-3 px-1 text-xs text-slate-400">
+            <span class="flex items-center gap-2 font-medium text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Disponibilidade ao vivo sincronizada com Google Calendar (30 min)</span>
+            </span>
+            <a href="https://app.cal.com/miguelds/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-rose-400 hover:text-rose-300 transition font-mono bg-rose-500/10 border border-rose-500/20 px-3 py-1 rounded-lg">
+              <span>Abrir em cal.com/miguelds/30min</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
+
+          <!-- Cal inline embed container -->
+          <div class="w-full rounded-2xl overflow-hidden border border-slate-800/90 bg-[#0b0c10] p-1 sm:p-2 shadow-2xl">
+            <!-- Cal inline embed code begins -->
+            <div style="width:100%;height:100%;min-height:680px;overflow:scroll" id="my-cal-inline-30min"></div>
+            <script type="text/javascript">
+              (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+            Cal("init", "30min", {origin:"https://app.cal.com"});
+            Cal.config = Cal.config || {};
+            Cal.config.forwardQueryParams = true;
+
+              Cal.ns["30min"]("inline", {
+                elementOrSelector:"#my-cal-inline-30min",
+                config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"auto"},
+                calLink: "miguelds/30min",
+              });
+
+              Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+            </script>
+            <!-- Cal inline embed code ends -->
+          </div>
+        </div>
+
+        <!-- 2. EXPRESS 1:1 SCHEDULER VIEW (SECONDARY ALTERNATIVE) -->
+        <div id="quick-scheduler-view" class="hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Column 1: Date & Time Selector -->
+            <div class="lg:col-span-7 space-y-6">
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 font-semibold">
+                  1. Selecione o Dia Pretendido
+                </label>
+                <div class="grid grid-cols-4 sm:grid-cols-5 gap-2.5" id="calendar-days-container">
+                  <!-- Dynamically populated via JS -->
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 font-semibold">
+                  2. Selecione o Horário (Fuso Horário de Lisboa - WET)
+                </label>
+                <div class="grid grid-cols-3 sm:grid-cols-4 gap-2.5" id="time-slots-container">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2 font-semibold">
+                  3. Especialista & Tópico de Interesse
+                </label>
+                <select id="schedule-topic" class="w-full text-xs px-4 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-200 outline-none focus:border-rose-500">
+                  <option value="iphone18">iPhone 18 Pro & ProRes 8K (Cineastas & Criativos)</option>
+                  <option value="duo">iPhone Duo & Multitarefa Dobrável</option>
+                  <option value="watch">Apple Watch Series 12 & Telemetria Cardíaca Clínica</option>
+                  <option value="m5">Mac M5 & Cargas de Trabalho em IA / Engenharia</option>
+                  <option value="corporate">Apoio a Empresas & Aquisições B2B</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Column 2: User Details & Instant Confirmation -->
+            <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800 lg:pl-8 flex flex-col justify-between">
+              <form id="calcom-booking-form" onsubmit="handleCalComSubmit(event)" class="space-y-4">
+                <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wide font-mono">
+                  Os Seus Dados de Confirmação
+                </h4>
+
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Nome Completo</label>
+                  <input type="text" id="booking-name" required placeholder="Ex: Diogo Silva" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-purple-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">E-mail (para envio do convite Calendar)</label>
+                  <input type="email" id="booking-email" required placeholder="diogo@exemplo.pt" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-purple-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Telemóvel (+351)</label>
+                  <input type="tel" id="booking-phone" required placeholder="912 345 678" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-purple-500">
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-800/40 text-xs text-purple-300 space-y-1">
+                  <p class="font-semibold flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Sincronização Automática
+                  </p>
+                  <p class="text-[11px] text-slate-400">
+                    Ao confirmar, receberá o convite com link Google Meet e lembrete 30 minutos antes.
+                  </p>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-rose-600 hover:from-purple-500 hover:to-rose-500 text-white font-bold text-xs transition shadow-lg shadow-purple-900/30 cursor-pointer flex items-center justify-center gap-2">
+                  <span>Confirmar Agendamento no Cal.com</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+              </form>
+
+              <div id="booking-success-message" class="hidden p-6 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-center space-y-2 mt-4">
+                <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h5 class="text-sm font-bold text-white">Reunião Agendada com Sucesso!</h5>
+                <p class="text-xs text-slate-300" id="booking-summary-text">
+                  O convite para o Google Calendar foi enviado com sucesso.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6. FAQ SECTION (ACCORDION) -->
+  <!-- ========================================================================= -->
+  <section id="faq" class="py-24 border-t border-slate-800 bg-[#0a0a0c]">
+    <div class="max-w-4xl mx-auto px-6">
+      
+      <div class="text-center mb-12">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-rose-500 mb-2 font-bold">
+          Respostas Claras
+        </h2>
+        <p class="text-3xl md:text-4xl font-extrabold tracking-tight">
+          Perguntas Frequentes
+        </p>
+        <p class="text-slate-400 mt-2 text-sm">
+          Tudo o que precisa de saber sobre disponibilidade, reservas e envios em Portugal.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion Container -->
+      <div id="faq-accordion-container" class="space-y-3.5">
+        <!-- 10 Questions injected and toggled via JavaScript -->
+      </div>
+
+      <!-- Direct Phone Support Contact Card -->
+      <div class="mt-12 p-5 rounded-2xl border border-slate-800 bg-slate-900/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-100 text-sm">Precisa de assistência por telefone imediata?</h4>
+            <p class="text-slate-400">Especialistas Apple disponíveis para compras individuais ou consultoria corporativa.</p>
+          </div>
+        </div>
+        <a href="tel:800207758" class="font-mono font-bold text-rose-400 hover:text-rose-300 text-sm border border-rose-500/30 bg-rose-500/10 px-4 py-2 rounded-xl transition">
+          800 207 758 (Grátis)
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 7. FINAL CTA & FOOTER -->
+  <!-- ========================================================================= -->
+  <section id="cta" class="py-24 relative overflow-hidden bg-gradient-to-b from-[#0a0a0c] via-burgundy-950/25 to-[#08080a]">
+    <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+      
+      <span class="text-xs font-mono uppercase tracking-widest text-rose-400 border border-rose-500/30 bg-rose-500/10 px-4 py-1.5 rounded-full inline-block mb-6 font-bold">
+        Reservas Abertas em Portugal
+      </span>
+
+      <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+        Garantir o seu lugar na nova era do desempenho.
+      </h2>
+
+      <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        Efetue a sua pré-reserva hoje mesmo e receba o seu dispositivo com prioridade no dia de lançamento oficial, a 18 de setembro.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <button 
+          onclick="openReservationModal('iphone-18-pro')" 
+          class="w-full sm:w-auto px-10 py-4 rounded-full bg-slate-100 text-slate-950 font-bold text-base hover:bg-white transition transform hover:scale-105 shadow-2xl shadow-rose-950/40 cursor-pointer"
+        >
+          Reservar Agora
+        </button>
+        <button 
+          onclick="openPricingModal()" 
+          class="w-full sm:w-auto px-10 py-4 rounded-full font-semibold text-base border border-slate-700 bg-slate-900/80 hover:bg-slate-800 text-slate-200 transition cursor-pointer"
+        >
+          Ver Preços e Modelos
+        </button>
+      </div>
+
+      <!-- Trust Badges Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left border-t border-slate-800/80 pt-12">
+        <div class="flex items-start gap-4">
+          <div class="p-3 rounded-xl bg-slate-800/80 text-rose-400 border border-slate-700 shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8"/></svg>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm text-slate-100">Envio Gratuito em Portugal</h4>
+            <p class="text-xs text-slate-400 mt-1">Entrega rápida ao domicílio ou levantamento na Apple Store com agendamento prioritário.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="p-3 rounded-xl bg-slate-800/80 text-emerald-400 border border-slate-700 shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm text-slate-100">Garantia de 3 Anos</h4>
+            <p class="text-xs text-slate-400 mt-1">Proteção legal completa segundo a diretiva europeia com centros de assistência autorizados Apple.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="p-3 rounded-xl bg-slate-800/80 text-blue-400 border border-slate-700 shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm text-slate-100">Apple Trade In</h4>
+            <p class="text-xs text-slate-400 mt-1">Troque o seu equipamento atual por crédito imediato deduzido na sua nova reserva.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Legal Footer -->
+  <footer class="border-t border-slate-800/80 bg-[#08080a] text-xs py-12 text-slate-500">
+    <div class="max-w-7xl mx-auto px-6 space-y-6">
+      <p class="leading-relaxed">
+        * Oferta de cartão-oferta válida para compras elegíveis efetuadas por estudantes universitários e docentes qualificados em Portugal. Sujeito aos Termos e Condições do programa Apple Educação. As datas de disponibilidade do iPhone Duo e restantes equipamentos podem sofrer alterações conforme os lotes de importação regulamentar.
+      </p>
+      <div class="border-t border-slate-800/60 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p>© 2026 Apple Inc. Todos os direitos reservados. Apoio ao Cliente Nacional: 800 207 758.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:underline hover:text-slate-300">Política de Privacidade</a>
+          <a href="#" class="hover:underline hover:text-slate-300">Termos de Utilização</a>
+          <a href="#" class="hover:underline hover:text-slate-300">Vendas e Reembolsos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- 8. FLOATING CHATBOT WIDGET (JAVASCRIPT INTERACTIVE) -->
+  <!-- ========================================================================= -->
+  <div id="apple-chatbot-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- Chat Window Container -->
+    <div id="chatbot-window" class="hidden mb-4 w-96 max-w-[calc(100vw-2rem)] h-[520px] rounded-3xl border border-slate-800 bg-[#0f1015]/95 backdrop-blur-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-200">
+      
+      <!-- Chat Header -->
+      <div class="p-4 bg-gradient-to-r from-rose-950/80 via-purple-950/80 to-slate-900 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow">
+              
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-slate-950 rounded-full"></span>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-white">Apple Portugal</h4>
+            <p class="text-[11px] text-rose-300 font-mono">Suporte Inteligente • Google AI Studio</p>
+          </div>
+        </div>
+        <button onclick="toggleChatbot()" class="p-1.5 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Quick Chips Bar -->
+      <div class="px-4 py-2 bg-slate-950/60 border-b border-slate-800/80 flex items-center gap-1.5 overflow-x-auto text-[11px] no-scrollbar">
+        <button onclick="sendQuickPrompt('Quando é o lançamento?')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer">
+          📅 Lançamento
+        </button>
+        <button onclick="sendQuickPrompt('Quero agendar uma reunião')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-purple-900/40 border border-purple-700 text-purple-200 hover:bg-purple-900/60 transition cursor-pointer">
+          🗓️ Agendar Cal.com
+        </button>
+        <button onclick="sendQuickPrompt('Como funciona o Trade In?')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer">
+          🔄 Trade In
+        </button>
+        <button onclick="sendQuickPrompt('Quais os métodos de pagamento?')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer">
+          💳 Pagamento
+        </button>
+      </div>
+
+      <!-- Message History Window -->
+      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs">
+        <!-- Initial Greeting Message -->
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center justify-center shrink-0 text-xs">
+            
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-sm bg-slate-800/90 text-slate-200 border border-slate-700/60 max-w-[85%] leading-relaxed shadow-sm">
+            Olá! Em que posso ajudar relativamente aos novos iPhone 18 Pro, iPhone Duo, MacBook Pro M5, reservas prioritárias ou agendamento de reuniões no Cal.com?
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input Field -->
+      <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-3 bg-slate-950/80 border-t border-slate-800 flex items-center gap-2">
+        <input 
+          type="text" 
+          id="chat-input" 
+          placeholder="Escreva a sua dúvida (ex: data, agendar, garantia)..." 
+          class="flex-1 text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 placeholder-slate-500 outline-none focus:border-rose-500"
+          autocomplete="off"
+        />
+        <button type="submit" class="p-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white transition cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+        </button>
+      </form>
+
+    </div>
+
+    <!-- Floating Chat Toggle Button -->
+    <button 
+      id="chat-toggle-btn" 
+      onclick="toggleChatbot()" 
+      class="group relative p-4 rounded-full bg-gradient-to-tr from-rose-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer flex items-center justify-center"
+      title="Falar com Assistente Virtual Apple PT"
+      aria-label="Abrir Chat"
+    >
+      <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-slate-900 rounded-full animate-ping"></span>
+      <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+      
+      <!-- Chat Icon -->
+      <svg id="chat-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: RESERVATION / PRE-ORDER CONFIGURATOR -->
+  <!-- ========================================================================= -->
+  <div id="reservation-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-black/75 overflow-y-auto">
+    <div class="relative w-full max-w-2xl rounded-3xl border border-slate-800 bg-[#0f1015] text-slate-100 shadow-2xl overflow-hidden my-8">
+      
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl"></span>
+          <div>
+            <h3 class="font-bold text-lg" id="modal-product-title">Pré-Reserva Prioritária</h3>
+            <p class="text-xs text-slate-400">Atribuição de lote prioritário para Portugal</p>
+          </div>
+        </div>
+        <button onclick="closeReservationModal()" class="p-2 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6 sm:p-8 space-y-6">
+        <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-5">
+          
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-400 mb-2 font-semibold">1. Modelo Escolhido</label>
+            <select id="modal-select-product" class="w-full text-xs px-3.5 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500" onchange="updateModalPrice()">
+              <option value="iphone-18-pro">iPhone 18 Pro (Desde 1.349 € / 44,95 € mês)</option>
+              <option value="iphone-duo">iPhone Duo Dobrável (Desde 1.899 € / 63,30 € mês)</option>
+              <option value="watch-series-12">Apple Watch Series 12 (Desde 459 € / 15,30 € mês)</option>
+              <option value="macbook-pro-m5">MacBook Pro M5 (Desde 2.049 € / 68,30 € mês)</option>
+              <option value="airpods-5">AirPods 5 com ANC (Desde 199 € / 6,63 € mês)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-400 mb-2 font-semibold">2. Acabamento / Cor</label>
+              <select id="modal-select-color" class="w-full text-xs px-3.5 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+                <option value="burgundy">Titanium Burgundy Deep</option>
+                <option value="black">Titânio Preto Espacial</option>
+                <option value="natural">Titânio Natural</option>
+                <option value="white">Titânio Branco Puro</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-400 mb-2 font-semibold">3. Capacidade</label>
+              <select id="modal-select-storage" class="w-full text-xs px-3.5 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500" onchange="updateModalPrice()">
+                <option value="256">256 GB (Incluído)</option>
+                <option value="512">512 GB (+ 240 €)</option>
+                <option value="1024">1 TB (+ 480 €)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Trade-in check -->
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold text-slate-200">Apple Trade In (Troca de equipamento)</p>
+              <p class="text-[11px] text-slate-400">Poupe até 350 € com desconto imediato.</p>
+            </div>
+            <input type="checkbox" id="modal-tradein" onchange="updateModalPrice()" class="w-4 h-4 rounded text-rose-500 focus:ring-rose-500">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <input type="text" id="res-name" required placeholder="Nome Completo" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+            <input type="email" id="res-email" required placeholder="E-mail" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+            <input type="tel" id="res-phone" required placeholder="Telemóvel (+351)" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+            <select id="res-city" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+              <option value="Lisboa">Entrega: Lisboa & Vale do Tejo</option>
+              <option value="Porto">Entrega: Porto & Norte</option>
+              <option value="Coimbra">Entrega: Coimbra & Centro</option>
+              <option value="Faro">Entrega: Faro & Algarve</option>
+              <option value="Ilhas">Entrega: Regiões Autónomas</option>
+            </select>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-mono text-slate-400 uppercase">Total Previsto:</span>
+              <p class="text-2xl font-black text-rose-400" id="modal-total-price">1.349 €</p>
+              <p class="text-[11px] text-slate-400" id="modal-installment-text">ou em 24x de 56,20 €/mês sem juros</p>
+            </div>
+            <button type="submit" class="px-6 py-3 rounded-full bg-slate-100 hover:bg-white text-slate-950 font-bold text-xs transition cursor-pointer shadow-lg shadow-white/5">
+              Confirmar Reserva
+            </button>
+          </div>
+
+        </form>
+
+        <div id="reservation-success" class="hidden text-center py-6 space-y-3">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h4 class="text-lg font-bold text-white">Reserva Registada com Prioridade!</h4>
+          <p class="text-xs text-slate-300" id="res-voucher-code"></p>
+          <button onclick="closeReservationModal()" class="px-6 py-2.5 rounded-full bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer mt-4">
+            Fechar
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: PRICING & MODELS -->
+  <!-- ========================================================================= -->
+  <div id="pricing-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-black/75 overflow-y-auto">
+    <div class="relative w-full max-w-4xl rounded-3xl border border-slate-800 bg-[#0e0f14] text-slate-100 shadow-2xl overflow-hidden my-8">
+      
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div>
+          <span class="text-xs font-mono uppercase text-rose-400 font-bold">Catálogo Oficial Portugal</span>
+          <h3 class="text-xl font-bold">Tabela de Preços e Modelos 2026</h3>
+        </div>
+        <button onclick="closePricingModal()" class="p-2 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6 sm:p-8 space-y-4 max-h-[75vh] overflow-y-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <span class="text-[10px] font-mono text-rose-400 uppercase font-bold">Destaque Flagship</span>
+                  <h4 class="text-lg font-bold">iPhone 18 Pro</h4>
+                </div>
+                <div class="text-right">
+                  <span class="text-lg font-black text-white">Desde 1.349 €</span>
+                  <p class="text-[10px] text-slate-400">ou 44,95 €/mês (24x)</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mb-3">Chip A19 Pro 2nm, três câmaras de 48 MP, acabamento Titanium Burgundy.</p>
+            </div>
+            <button onclick="closePricingModal(); openReservationModal('iphone-18-pro');" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer">
+              Configurar iPhone 18 Pro &rarr;
+            </button>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Inovação Dobrável</span>
+                  <h4 class="text-lg font-bold">iPhone Duo</h4>
+                </div>
+                <div class="text-right">
+                  <span class="text-lg font-black text-white">Desde 1.899 €</span>
+                  <p class="text-[10px] text-slate-400">ou 63,30 €/mês (24x)</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mb-3">Ecrã duplo flexível sem vinco, multitarefa contínua, reservas a 16/10.</p>
+            </div>
+            <button onclick="closePricingModal(); openReservationModal('iphone-duo');" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer">
+              Reservar iPhone Duo &rarr;
+            </button>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Saúde Clínica</span>
+                  <h4 class="text-lg font-bold">Apple Watch Series 12</h4>
+                </div>
+                <div class="text-right">
+                  <span class="text-lg font-black text-white">Desde 459 €</span>
+                  <p class="text-[10px] text-slate-400">ou 15,30 €/mês (24x)</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mb-3">Validação clínica rigorosa 2026, 3000 nits, carregamento rápido.</p>
+            </div>
+            <button onclick="closePricingModal(); openReservationModal('watch-series-12');" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer">
+              Reservar Watch 12 &rarr;
+            </button>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <div>
+                  <span class="text-[10px] font-mono text-blue-400 uppercase font-bold">Apple Silicon</span>
+                  <h4 class="text-lg font-bold">MacBook Pro M5</h4>
+                </div>
+                <div class="text-right">
+                  <span class="text-lg font-black text-white">Desde 2.049 €</span>
+                  <p class="text-[10px] text-slate-400">ou 68,30 €/mês (24x)</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mb-3">Chips M5 e M5 Pro, 22h de bateria, ecrã Liquid Retina XDR.</p>
+            </div>
+            <button onclick="closePricingModal(); openReservationModal('macbook-pro-m5');" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer">
+              Reservar Mac M5 &rarr;
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: DATA, INTERACTIVITY & CHATBOT ENGINE -->
+  <!-- ========================================================================= -->
+  <script>
+    // -------------------------------------------------------------
+    // KNOWLEDGE BASE (10 QUESTIONS & ANSWERS AS JSON)
+    // -------------------------------------------------------------
+    const faqData = [
+      {
+        id: 1,
+        keywords: ["data", "quando", "lançamento", "disponível", "chega", "setembro", "outubro"],
+        q: "Quando é que os novos dispositivos estarão disponíveis em Portugal?",
+        a: "O iPhone 18 Pro, Apple Watch Series 12 e AirPods 5 estarão disponíveis nas lojas e para entrega a partir de 18 de setembro de 2026. As reservas do iPhone Duo começam a 16 de outubro às 13h, com disponibilidade física a 23 de outubro."
+      },
+      {
+        id: 2,
+        keywords: ["reserva", "pre-order", "preorder", "encomendar", "comprar", "como funciona"],
+        q: "Como funciona o processo de reserva (Pre-Order)?",
+        a: "Pode reservar diretamente no nosso site ou através do botão 'Reservar Agora'. A reserva garante a atribuição prioritária do dispositivo no dia de lançamento oficial (18/09), com opção de envio expresso gratuito ao domicílio ou levantamento na loja Apple com hora marcada."
+      },
+      {
+        id: 3,
+        keywords: ["trade in", "retoma", "antigo", "troca", "desconto", "usado", "credito"],
+        q: "Posso dar o meu dispositivo antigo em retoma (Apple Trade In)?",
+        a: "Sim! Através do Apple Trade In, pode trocar o seu dispositivo atual por um crédito imediato deduzido na compra do novo modelo (por exemplo, até 420 € num iPhone 15 Pro Max em bom estado). O processo pode ser avaliado online no configurador ou concluído numa loja Apple."
+      },
+      {
+        id: 4,
+        keywords: ["estudante", "educação", "escola", "universidade", "professor", "desconto estudante", "cartao oferta", "back to school"],
+        q: "Como funciona a oferta da Campanha de Educação (Back to School)?",
+        a: "Estudantes universitários, encarregados de educação e docentes qualificados em Portugal recebem um cartão-oferta Apple no valor de 80 € a 120 € na compra de um Mac ou iPad selecionado, além do desconto direto de educação no equipamento."
+      },
+      {
+        id: 5,
+        keywords: ["precisão", "cientifica", "medica", "coração", "cardíaca", "saude", "ecg", "watch 12"],
+        q: "Qual é a base científica da monitorização cardíaca do Apple Watch Series 12?",
+        a: "A precisão do sensor cardíaco de nova geração foi validada em estudos clínicos independentes (realizados em julho/agosto de 2026), demonstrando 99,4% de correlação com eletrocardiogramas hospitalares de grau médico, além de medição contínua de biomarcadores vasculares."
+      },
+      {
+        id: 6,
+        keywords: ["duo", "dobravel", "ecra duplo", "compativel", "apps", "aplicações"],
+        q: "O iPhone Duo é compatível com todas as aplicações em ecrã duplo?",
+        a: "Sim. O iOS possui um motor de multitasking adaptativo nativo que permite executar qualquer aplicação lado a lado sem distorção, ou estender aplicações de fotografia, folhas de cálculo e streaming num painel contínuo sem vinco perceptível."
+      },
+      {
+        id: 7,
+        keywords: ["bateria", "autonomia", "ultra", "horas", "watch ultra", "duracao"],
+        q: "Qual é a autonomia da bateria do Apple Watch Ultra 4?",
+        a: "O Apple Watch Ultra 4 oferece até 36 horas de autonomia contínua em utilização normal e até 72 horas no modo de Pouca Potência otimizado para expedições de montanha ou ultra-maratonas."
+      },
+      {
+        id: 8,
+        keywords: ["telefone", "contacto", "apoio", "suporte", "falar", "empresa", "b2b", "corporativo", "numero"],
+        q: "É possível obter assistência telefónica ou apoio à compra corporativa?",
+        a: "Sim. A nossa equipa de consultores especializados em Portugal está disponível através do número gratuito 800 207 758 para apoio à configuração, reservas pessoais ou soluções fiscais para empresas."
+      },
+      {
+        id: 9,
+        keywords: ["pagamento", "mbway", "mb way", "prestacoes", "mensalidades", "juros", "credito", "financiamento", "apple pay"],
+        q: "Quais são as opções de pagamento e financiamento disponível?",
+        a: "Disponibilizamos MB WAY, Apple Pay, Cartões de Crédito Visa/Mastercard e opções de financiamento até 24 ou 36 meses sem juros (TAEG 0%) com os nossos parceiros bancários aderentes em Portugal."
+      },
+      {
+        id: 10,
+        keywords: ["garantia", "devolução", "troca", "14 dias", "3 anos", "ue", "direito"],
+        q: "Qual é a garantia e a política de devolução dos produtos?",
+        a: "Todos os produtos comercializados na União Europeia e em Portugal beneficiam de 3 anos de garantia legal integral. Dispõe ainda de um período de 14 dias após a receção física para efetuar a devolução sem custos e com reembolso total."
+      }
+    ];
+
+    // -------------------------------------------------------------
+    // RENDER FAQ ACCORDION IN PAGE
+    // -------------------------------------------------------------
+    function renderFaqAccordion() {
+      const container = document.getElementById('faq-accordion-container');
+      if (!container) return;
+
+      container.innerHTML = faqData.map((item, index) => `
+        <div class="rounded-2xl border border-slate-800 bg-slate-900/50 hover:border-slate-700 transition overflow-hidden">
+          <button 
+            type="button" 
+            onclick="toggleFaqAccordion(${item.id})" 
+            class="w-full text-left p-6 flex justify-between items-center gap-4 font-semibold text-sm sm:text-base focus:outline-none cursor-pointer"
+          >
+            <span>${item.q}</span>
+            <svg id="faq-chevron-${item.id}" class="w-5 h-5 text-slate-400 transform transition-transform duration-200 shrink-0 ${index === 0 ? 'rotate-180 text-rose-400' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="faq-ans-${item.id}" class="px-6 pb-6 text-sm text-slate-400 leading-relaxed border-t border-slate-800/40 pt-4 ${index === 0 ? '' : 'hidden'}">
+            ${item.a}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaqAccordion(id) {
+      const ans = document.getElementById(`faq-ans-${id}`);
+      const chevron = document.getElementById(`faq-chevron-${id}`);
+      if (!ans || !chevron) return;
+
+      const isHidden = ans.classList.contains('hidden');
+      if (isHidden) {
+        ans.classList.remove('hidden');
+        chevron.classList.add('rotate-180', 'text-rose-400');
+      } else {
+        ans.classList.add('hidden');
+        chevron.classList.remove('rotate-180', 'text-rose-400');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // CAL.COM SCHEDULER INTERACTIVE CONTROLS
+    // -------------------------------------------------------------
+    let selectedDayIndex = 0;
+    let selectedTimeSlot = "10:30";
+
+    function initCalComScheduler() {
+      const daysContainer = document.getElementById('calendar-days-container');
+      const timeContainer = document.getElementById('time-slots-container');
+      if (!daysContainer || !timeContainer) return;
+
+      const days = [
+        { label: "Hoje", date: "18 Set", dayName: "Sex" },
+        { label: "Amanhã", date: "19 Set", dayName: "Sáb" },
+        { label: "Segunda", date: "21 Set", dayName: "Seg" },
+        { label: "Terça", date: "22 Set", dayName: "Ter" },
+        { label: "Quarta", date: "23 Set", dayName: "Qua" },
+      ];
+
+      daysContainer.innerHTML = days.map((d, idx) => `
+        <button 
+          type="button" 
+          onclick="selectCalendarDay(${idx})" 
+          class="p-2.5 rounded-xl border text-center transition cursor-pointer ${idx === 0 ? 'border-purple-500 bg-purple-500/20 text-purple-300 font-bold' : 'border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700'}"
+          id="cal-day-btn-${idx}"
+        >
+          <span class="block text-[10px] font-mono uppercase text-slate-500">${d.dayName}</span>
+          <span class="block text-xs font-bold text-slate-100">${d.date}</span>
+        </button>
+      `).join('');
+
+      const slots = ["09:30", "10:30", "11:30", "14:00", "15:00", "16:30", "17:30", "18:30"];
+      timeContainer.innerHTML = slots.map(s => `
+        <button 
+          type="button" 
+          onclick="selectTimeSlot('${s}')" 
+          class="py-2 px-3 rounded-lg border text-xs text-center transition cursor-pointer ${s === selectedTimeSlot ? 'border-rose-500 bg-rose-500/20 text-rose-300 font-bold' : 'border-slate-800 bg-slate-900/40 text-slate-300 hover:border-slate-700'}"
+          id="time-slot-btn-${s.replace(':', '')}"
+        >
+          ${s}
+        </button>
+      `).join('');
+    }
+
+    function selectCalendarDay(idx) {
+      selectedDayIndex = idx;
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById(`cal-day-btn-${i}`);
+        if (btn) {
+          if (i === idx) {
+            btn.className = "p-2.5 rounded-xl border text-center transition cursor-pointer border-purple-500 bg-purple-500/20 text-purple-300 font-bold";
+          } else {
+            btn.className = "p-2.5 rounded-xl border text-center transition cursor-pointer border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700";
+          }
+        }
+      }
+    }
+
+    function selectTimeSlot(slot) {
+      selectedTimeSlot = slot;
+      const slots = ["09:30", "10:30", "11:30", "14:00", "15:00", "16:30", "17:30", "18:30"];
+      slots.forEach(s => {
+        const btn = document.getElementById(`time-slot-btn-${s.replace(':', '')}`);
+        if (btn) {
+          if (s === slot) {
+            btn.className = "py-2 px-3 rounded-lg border text-xs text-center transition cursor-pointer border-rose-500 bg-rose-500/20 text-rose-300 font-bold";
+          } else {
+            btn.className = "py-2 px-3 rounded-lg border text-xs text-center transition cursor-pointer border-slate-800 bg-slate-900/40 text-slate-300 hover:border-slate-700";
+          }
+        }
+      });
+    }
+
+    function handleCalComSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('booking-name').value;
+      const email = document.getElementById('booking-email').value;
+      const form = document.getElementById('calcom-booking-form');
+      const successMsg = document.getElementById('booking-success-message');
+      const summaryText = document.getElementById('booking-summary-text');
+
+      if (form && successMsg && summaryText) {
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+        summaryText.innerHTML = `Obrigado, <strong>${name}</strong>! O convite para o Google Calendar foi enviado para <strong>${email}</strong> às ${selectedTimeSlot} (Hora de Lisboa).`;
+      }
+    }
+
+    function switchSchedulerTab(tab) {
+      const calView = document.getElementById('cal-widget-view');
+      const quickView = document.getElementById('quick-scheduler-view');
+      const btnCal = document.getElementById('tab-btn-cal');
+      const btnQuick = document.getElementById('tab-btn-quick');
+
+      if (!calView || !quickView || !btnCal || !btnQuick) return;
+
+      if (tab === 'cal') {
+        calView.classList.remove('hidden');
+        quickView.classList.add('hidden');
+        btnCal.className = "flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-rose-600 text-white font-bold text-xs shadow-md transition cursor-pointer";
+        btnQuick.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 font-semibold text-xs transition cursor-pointer";
+      } else {
+        calView.classList.add('hidden');
+        quickView.classList.remove('hidden');
+        btnQuick.className = "flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-rose-600 text-white font-bold text-xs shadow-md transition cursor-pointer";
+        btnCal.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 font-semibold text-xs transition cursor-pointer";
+      }
+    }
+    window.switchSchedulerTab = switchSchedulerTab;
+
+    // -------------------------------------------------------------
+    // FLOATING CHATBOT ENGINE & GOOGLE AI STUDIO GEMINI INTEGRATION
+    // -------------------------------------------------------------
+    const chatConversationHistory = [];
+
+    function toggleChatbot() {
+      const windowEl = document.getElementById('chatbot-window');
+      if (!windowEl) return;
+      windowEl.classList.toggle('hidden');
+      if (!windowEl.classList.contains('hidden')) {
+        document.getElementById('chat-input')?.focus();
+      }
+    }
+
+    function sendQuickPrompt(text) {
+      const input = document.getElementById('chat-input');
+      if (input) {
+        input.value = text;
+        handleChatSubmit(new Event('submit'));
+      }
+    }
+
+    function formatBotReply(rawText) {
+      if (!rawText) return "";
+      
+      // Escape HTML entities to avoid XSS
+      let safe = rawText
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      // Replace bold markdown **text** with strong
+      safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+      // Replace bullet points * or -
+      safe = safe.replace(/^\s*[\*\-]\s+(.*)$/gm, '<li class="ml-4 list-disc text-slate-300">$1</li>');
+      // Group contiguous <li> into <ul>
+      safe = safe.replace(/(<li[\s\S]*?<\/li>)/g, '<ul class="space-y-1 my-1.5">$1</ul>');
+      // Wrap paragraphs
+      safe = safe.replace(/\n\n+/g, '</p><p class="mt-2">');
+      safe = safe.replace(/\n/g, '<br/>');
+
+      let html = `<p>${safe}</p>`;
+
+      // Contextual action shortcuts
+      const lower = rawText.toLowerCase();
+      if (/agendar|agendamento|reunião|reuniao|marcar|meet|calendar/i.test(lower)) {
+        html += `
+          <div class="mt-3 pt-2.5 border-t border-slate-700/60 flex flex-wrap gap-2">
+            <a href="#agendamento" onclick="toggleChatbot()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-rose-600 text-white font-bold text-[11px] shadow hover:opacity-95">
+              <span>🗓️ Abrir Agendamento Cal.com</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        `;
+      } else if (/reservar|reserva|pré-reserva|pre-reserva|encomendar/i.test(lower)) {
+        html += `
+          <div class="mt-3 pt-2.5 border-t border-slate-700/60 flex flex-wrap gap-2">
+            <button onclick="openReservationModal('iphone-18-pro')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-white text-slate-950 font-bold text-[11px] shadow cursor-pointer">
+              <span>Configurar Pré-Reserva</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+          </div>
+        `;
+      }
+
+      return html;
+    }
+
+    async function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const messagesContainer = document.getElementById('chat-messages');
+      if (!input || !messagesContainer) return;
+
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      // 1. Add User Bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex justify-end animate-in fade-in duration-150";
+      userBubble.innerHTML = `
+        <div class="p-3 rounded-2xl rounded-tr-sm bg-gradient-to-r from-rose-600 to-purple-600 text-white max-w-[85%] leading-relaxed shadow">
+          ${userText.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+        </div>
+      `;
+      messagesContainer.appendChild(userBubble);
+      input.value = "";
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // Add to conversation history
+      chatConversationHistory.push({ role: 'user', text: userText });
+
+      // 2. Add Animated Typing Indicator Bubble
+      const typingBubble = document.createElement('div');
+      typingBubble.id = "chat-typing-indicator";
+      typingBubble.className = "flex items-start gap-2.5 animate-in fade-in duration-150";
+      typingBubble.innerHTML = `
+        <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center justify-center shrink-0 text-xs">
+          
+        </div>
+        <div class="p-3 rounded-2xl rounded-tl-sm bg-slate-800/90 text-slate-300 border border-slate-700/60 max-w-[85%] flex items-center gap-1.5 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse" style="animation-delay: 200ms;"></span>
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" style="animation-delay: 400ms;"></span>
+          <span class="text-[11px] text-slate-400 ml-1.5 font-mono">A consultar Apple IA...</span>
+        </div>
+      `;
+      messagesContainer.appendChild(typingBubble);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // 3. Request Google AI Studio Gemini API via Server-Side /api/chat
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: userText,
+            history: chatConversationHistory.slice(-8)
+          })
+        });
+
+        const data = await response.json();
+        typingBubble.remove();
+
+        const replyText = data.reply || (data.error ? `Erro: ${data.error}` : "Pedimos desculpa, não foi possível obter uma resposta no momento.");
+        chatConversationHistory.push({ role: 'model', text: replyText });
+
+        const botBubble = document.createElement('div');
+        botBubble.className = "flex items-start gap-2.5 animate-in fade-in duration-200";
+        botBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center justify-center shrink-0 text-xs">
+            
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-sm bg-slate-800/90 text-slate-200 border border-slate-700/60 max-w-[85%] leading-relaxed shadow-sm">
+            ${formatBotReply(replyText)}
+          </div>
+        `;
+        messagesContainer.appendChild(botBubble);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      } catch (err) {
+        console.error("Chatbot request failed:", err);
+        typingBubble.remove();
+
+        const botBubble = document.createElement('div');
+        botBubble.className = "flex items-start gap-2.5 animate-in fade-in duration-200";
+        botBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center justify-center shrink-0 text-xs">
+            
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-sm bg-slate-800/90 text-slate-200 border border-slate-700/60 max-w-[85%] leading-relaxed shadow-sm">
+            <p>Ocorreu uma dificuldade temporária na ligação ao serviço de IA. Pode contactar a equipa Apple Portugal através do número gratuito <strong>800 207 758</strong> ou tentar novamente.</p>
+          </div>
+        `;
+        messagesContainer.appendChild(botBubble);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    }
+
+    // -------------------------------------------------------------
+    // MODAL HANDLERS
+    // -------------------------------------------------------------
+    function openReservationModal(productId = 'iphone-18-pro') {
+      const modal = document.getElementById('reservation-modal');
+      const select = document.getElementById('modal-select-product');
+      if (select) select.value = productId;
+      updateModalPrice();
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+    }
+
+    function closeReservationModal() {
+      const modal = document.getElementById('reservation-modal');
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+    }
+
+    function openPricingModal() {
+      const modal = document.getElementById('pricing-modal');
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+    }
+
+    function closePricingModal() {
+      const modal = document.getElementById('pricing-modal');
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+    }
+
+    function updateModalPrice() {
+      const prod = document.getElementById('modal-select-product')?.value || 'iphone-18-pro';
+      const storage = document.getElementById('modal-select-storage')?.value || '256';
+      const tradein = document.getElementById('modal-tradein')?.checked || false;
+
+      let basePrice = 1349;
+      if (prod === 'iphone-duo') basePrice = 1899;
+      if (prod === 'watch-series-12') basePrice = 459;
+      if (prod === 'macbook-pro-m5') basePrice = 2049;
+      if (prod === 'airpods-5') basePrice = 199;
+
+      let extraStorage = 0;
+      if (storage === '512') extraStorage = 240;
+      if (storage === '1024') extraStorage = 480;
+
+      let tradeInDeduction = tradein ? 350 : 0;
+      let finalPrice = Math.max(0, basePrice + extraStorage - tradeInDeduction);
+      let monthly = (finalPrice / 24).toFixed(2);
+
+      const priceEl = document.getElementById('modal-total-price');
+      const instEl = document.getElementById('modal-installment-text');
+      if (priceEl) priceEl.innerText = `${finalPrice} €`;
+      if (instEl) instEl.innerText = `ou em 24x de ${monthly} €/mês sem juros (TAEG 0%)`;
+    }
+
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('reservation-form');
+      const success = document.getElementById('reservation-success');
+      const voucher = document.getElementById('res-voucher-code');
+      const randomCode = `PT-AAPL-${Math.floor(100000 + Math.random() * 900000)}`;
+
+      if (form && success && voucher) {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+        voucher.innerHTML = `Código de Atribuição Prioritária: <strong class="text-rose-400 font-mono text-sm">${randomCode}</strong><br><span class="text-slate-400 text-[11px]">Enviámos a confirmação e o comprovativo de reserva para o seu e-mail.</span>`;
+      }
+    }
+
+    // -------------------------------------------------------------
+    // DARK / LIGHT THEME TOGGLE
+    // -------------------------------------------------------------
+    function toggleTheme() {
+      const html = document.documentElement;
+      const sun = document.getElementById('sun-icon');
+      const moon = document.getElementById('moon-icon');
+
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        sun?.classList.remove('hidden');
+        moon?.classList.add('hidden');
+      } else {
+        html.classList.add('dark');
+        sun?.classList.add('hidden');
+        moon?.classList.remove('hidden');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // INITIALIZATION
+    // -------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFaqAccordion();
+      initCalComScheduler();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Apple Portugal - Lançamento 2026",
+  "description": "Landing page oficial para o lançamento e reserva dos novos iPhone 18 Pro, iPhone Duo, Apple Watch Series 12 e ecossistema Apple em Portugal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
