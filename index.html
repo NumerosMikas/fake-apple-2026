@@ -48,7 +48,7 @@
   </script>
 
   <style>
-    /* Custom Apple-grade scrollbar and blur effects */
+    /* Custom Apple-grade scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -62,15 +62,599 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #3f3f46;
     }
+
+    /* Glassmorphism primitives */
     .glassmorphism {
       background: rgba(18, 19, 24, 0.75);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
     .glassmorphism-light {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* Smooth transitions between light and dark */
+    body, header, section, footer, div, p, h1, h2, h3, h4, h5, span, input, select, button {
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    /* ======================================================== */
+    /* APPLE LIGHT MODE SPECIFICATION (Zero washed-out text)     */
+    /* ======================================================== */
+    html:not(.dark) {
+      color-scheme: light;
+    }
+    
+    html:not(.dark) body {
+      background-color: #f5f5f7 !important;
+      color: #1d1d1f !important;
+    }
+
+    html:not(.dark) ::-webkit-scrollbar-track {
+      background: #f5f5f7 !important;
+    }
+    html:not(.dark) ::-webkit-scrollbar-thumb {
+      background: #c7c7cc !important;
+    }
+    html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+      background: #aeaeb2 !important;
+    }
+
+    /* 1. Header & Navigation */
+    html:not(.dark) #main-navbar {
+      background-color: rgba(255, 255, 255, 0.88) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+    }
+    html:not(.dark) #main-navbar nav a {
+      color: #515154 !important;
+    }
+    html:not(.dark) #main-navbar nav a:hover {
+      color: #000000 !important;
+    }
+    html:not(.dark) #main-navbar nav a span[class*="text-rose"] {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #main-navbar a .bg-gradient-to-r {
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #theme-toggle {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    html:not(.dark) #theme-toggle:hover {
+      background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) header button[onclick*="openReservationModal"] {
+      background-color: #1d1d1f !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    html:not(.dark) header button[onclick*="openReservationModal"]:hover {
+      background-color: #000000 !important;
+    }
+
+    /* 2. Hero Section */
+    html:not(.dark) #hero h1 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #hero h1 span.bg-gradient-to-r {
+      background: linear-gradient(135deg, #9d173b 0%, #7e22ce 50%, #4338ca 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    html:not(.dark) #hero p {
+      color: #424245 !important;
+    }
+    html:not(.dark) #hero button[onclick*="openReservationModal"] {
+      background-color: #1d1d1f !important;
+      color: #ffffff !important;
+      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.18) !important;
+    }
+    html:not(.dark) #hero button[onclick*="openReservationModal"]:hover {
+      background-color: #000000 !important;
+    }
+    html:not(.dark) #hero button[onclick*="openPricingModal"] {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #hero button[onclick*="openPricingModal"]:hover {
+      background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl {
+      background-color: rgba(255, 255, 255, 0.8) !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07) !important;
+    }
+    /* Inner titanium showcase keeps deep burgundy contrast */
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl {
+      background: linear-gradient(145deg, #1b030b 0%, #2e0513 50%, #160209 100%) !important;
+      border-color: rgba(224, 83, 117, 0.25) !important;
+    }
+
+    /* 3. Personas Section */
+    html:not(.dark) #personas {
+      background-color: #ffffff !important;
+      border-top-color: #e5e5ea !important;
+    }
+    html:not(.dark) #personas h2 {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #personas p.text-3xl {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #personas p.text-slate-400 {
+      color: #515154 !important;
+    }
+    html:not(.dark) #personas .grid > div {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #personas .grid > div:hover {
+      border-color: #d2d2d7 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07) !important;
+    }
+    html:not(.dark) #personas .grid > div h3 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #personas .grid > div span.font-mono {
+      background-color: #f2f2f7 !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #personas .grid > div .w-10.h-10 {
+      background-color: #f2f2f7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #personas .bg-rose-950\/20 {
+      background-color: #fff1f2 !important;
+      border-color: #ffe4e6 !important;
+    }
+    html:not(.dark) #personas .bg-rose-950\/20 p.font-semibold {
+      color: #9f1239 !important;
+    }
+    html:not(.dark) #personas .bg-rose-950\/20 p.text-slate-300 {
+      color: #4c0519 !important;
+    }
+    html:not(.dark) #personas .bg-emerald-950\/20 {
+      background-color: #f0fdf4 !important;
+      border-color: #dcfce7 !important;
+    }
+    html:not(.dark) #personas .bg-emerald-950\/20 p.font-semibold {
+      color: #166534 !important;
+    }
+    html:not(.dark) #personas .bg-emerald-950\/20 p.text-slate-300 {
+      color: #14532d !important;
+    }
+    html:not(.dark) #personas .border-t.border-slate-800 {
+      border-top-color: #f2f2f7 !important;
+      color: #6e6e73 !important;
+    }
+    html:not(.dark) #personas .border-t.border-slate-800 button {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #personas .border-t.border-slate-800 button:hover {
+      color: #9d173b !important;
+    }
+
+    /* 4. Bento Grid Features */
+    html:not(.dark) #features {
+      background-color: #f5f5f7 !important;
+    }
+    html:not(.dark) #features h2 {
+      color: #4f46e5 !important;
+    }
+    html:not(.dark) #features p.text-3xl {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #features p.text-slate-400 {
+      color: #515154 !important;
+    }
+    html:not(.dark) #features .grid > div {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #features .grid > div:hover {
+      border-color: #c7c7cc !important;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.06) !important;
+    }
+    html:not(.dark) #features .grid > div h3 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #features .grid > div p.text-slate-400 {
+      color: #515154 !important;
+    }
+    html:not(.dark) #features .grid > div span[class*="bg-slate-800"] {
+      background-color: #f2f2f7 !important;
+      color: #515154 !important;
+    }
+    html:not(.dark) #features .grid > div span.text-purple-300 {
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #features .grid > div span.text-emerald-300 {
+      color: #15803d !important;
+    }
+    html:not(.dark) #features .grid > div span.text-blue-300 {
+      color: #1d4ed8 !important;
+    }
+    html:not(.dark) #features .grid > div span.text-amber-300 {
+      color: #b45309 !important;
+    }
+    html:not(.dark) #features .grid > div span.text-rose-300 {
+      color: #9d173b !important;
+    }
+    /* Education Bar in light mode */
+    html:not(.dark) #features .bg-gradient-to-r.from-blue-900\/40 {
+      background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%) !important;
+      border-color: #bfdbfe !important;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08) !important;
+    }
+    html:not(.dark) #features .bg-gradient-to-r.from-blue-900\/40 span {
+      color: #1d4ed8 !important;
+    }
+    html:not(.dark) #features .bg-gradient-to-r.from-blue-900\/40 h4 {
+      color: #1e3a8a !important;
+    }
+    html:not(.dark) #features .bg-gradient-to-r.from-blue-900\/40 p {
+      color: #1e40af !important;
+    }
+    html:not(.dark) #features .bg-gradient-to-r.from-blue-900\/40 button {
+      background-color: #2563eb !important;
+      color: #ffffff !important;
+    }
+
+    /* 5. Agendamento & Cal.com Section */
+    html:not(.dark) #agendamento {
+      background-color: #ffffff !important;
+      border-top-color: #e5e5ea !important;
+    }
+    html:not(.dark) #agendamento h2 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #agendamento p.text-slate-400 {
+      color: #515154 !important;
+    }
+    html:not(.dark) #agendamento .rounded-3xl.border-slate-800 {
+      background-color: #fcfcfd !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    }
+    html:not(.dark) #agendamento .border-b.border-slate-800 {
+      border-bottom-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #agendamento h3.text-white {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #agendamento .bg-slate-950\/80 {
+      background-color: #f2f2f7 !important;
+      border-color: #e5e5ea !important;
+    }
+    html:not(.dark) #tab-btn-quick:not([class*="from-purple"]) {
+      color: #515154 !important;
+    }
+    html:not(.dark) #tab-btn-quick:not([class*="from-purple"]):hover {
+      color: #000000 !important;
+      background-color: rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #tab-btn-cal:not([class*="from-purple"]) {
+      color: #515154 !important;
+    }
+    html:not(.dark) #tab-btn-cal:not([class*="from-purple"]):hover {
+      color: #000000 !important;
+      background-color: rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #cal-widget-view span.text-slate-300 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #cal-widget-view a[href*="cal.com"] {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9d173b !important;
+    }
+    html:not(.dark) #cal-widget-view .bg-\[\#0b0c10\] {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+    }
+    /* Quick scheduler view in light mode */
+    html:not(.dark) #quick-scheduler-view label {
+      color: #424245 !important;
+    }
+    html:not(.dark) #calendar-days-container button.border-slate-800 {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #calendar-days-container button.border-slate-800:hover {
+      background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #calendar-days-container button.border-slate-800 span.text-slate-100 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #time-slots-container button.border-slate-800 {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #time-slots-container button.border-slate-800:hover {
+      background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #schedule-topic {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #calcom-booking-form h4 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #calcom-booking-form label {
+      color: #424245 !important;
+    }
+    html:not(.dark) #calcom-booking-form input {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #calcom-booking-form .bg-purple-950\/20 {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+    }
+    html:not(.dark) #calcom-booking-form .bg-purple-950\/20 p.font-semibold {
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #calcom-booking-form .bg-purple-950\/20 p.text-slate-400 {
+      color: #6b21a8 !important;
+    }
+
+    /* 6. FAQ Section */
+    html:not(.dark) #faq {
+      background-color: #f5f5f7 !important;
+      border-top-color: #e5e5ea !important;
+    }
+    html:not(.dark) #faq h2 {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #faq p.text-3xl {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #faq p.text-slate-400 {
+      color: #515154 !important;
+    }
+    html:not(.dark) #faq-accordion-container > div {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    }
+    html:not(.dark) #faq-accordion-container > div:hover {
+      border-color: #d2d2d7 !important;
+    }
+    html:not(.dark) #faq-accordion-container button {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #faq-accordion-container svg[id^="faq-chevron"] {
+      color: #86868b !important;
+    }
+    html:not(.dark) #faq-accordion-container svg[id^="faq-chevron"].text-rose-400 {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #faq-accordion-container div[id^="faq-ans"] {
+      color: #424245 !important;
+      border-top-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #faq .mt-12.p-5 {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #faq .mt-12.p-5 h4 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #faq .mt-12.p-5 p {
+      color: #515154 !important;
+    }
+    html:not(.dark) #faq .mt-12.p-5 a[href^="tel"] {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9d173b !important;
+    }
+
+    /* 7. Final CTA & Footer */
+    html:not(.dark) #cta {
+      background: linear-gradient(180deg, #f5f5f7 0%, #faf3f5 50%, #ffffff 100%) !important;
+    }
+    html:not(.dark) #cta h2 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #cta p.text-slate-300 {
+      color: #424245 !important;
+    }
+    html:not(.dark) #cta button[onclick*="openReservationModal"] {
+      background-color: #1d1d1f !important;
+      color: #ffffff !important;
+      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.18) !important;
+    }
+    html:not(.dark) #cta button[onclick*="openReservationModal"]:hover {
+      background-color: #000000 !important;
+    }
+    html:not(.dark) #cta button[onclick*="openPricingModal"] {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    }
+    html:not(.dark) #cta button[onclick*="openPricingModal"]:hover {
+      background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 {
+      border-top-color: #e5e5ea !important;
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 .p-3 {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 h4 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 p {
+      color: #515154 !important;
+    }
+    html:not(.dark) footer {
+      background-color: #f5f5f7 !important;
+      border-top-color: #e5e5ea !important;
+      color: #86868b !important;
+    }
+    html:not(.dark) footer p {
+      color: #6e6e73 !important;
+    }
+    html:not(.dark) footer .border-t {
+      border-top-color: #e5e5ea !important;
+    }
+    html:not(.dark) footer a {
+      color: #515154 !important;
+    }
+    html:not(.dark) footer a:hover {
+      color: #000000 !important;
+    }
+
+    /* 8. Modals (Reservation & Pricing) */
+    html:not(.dark) #reservation-modal .modal-dialog,
+    html:not(.dark) #pricing-modal .modal-dialog,
+    html:not(.dark) #reservation-modal > div,
+    html:not(.dark) #pricing-modal > div {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      color: #1d1d1f !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2) !important;
+    }
+    html:not(.dark) #reservation-modal .border-b,
+    html:not(.dark) #pricing-modal .border-b {
+      background-color: #fbfbfd !important;
+      border-bottom-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #reservation-modal h3,
+    html:not(.dark) #pricing-modal h3 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #reservation-modal label {
+      color: #424245 !important;
+    }
+    html:not(.dark) #reservation-modal input,
+    html:not(.dark) #reservation-modal select {
+      background-color: #ffffff !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #reservation-modal input:focus,
+    html:not(.dark) #reservation-modal select:focus {
+      border-color: #9d173b !important;
+    }
+    html:not(.dark) #reservation-modal input::placeholder {
+      color: #86868b !important;
+    }
+    html:not(.dark) #reservation-modal #modal-tradein-card,
+    html:not(.dark) #reservation-modal .border-slate-800.bg-slate-900\/40 {
+      background-color: #f5f5f7 !important;
+      border-color: #e5e5ea !important;
+    }
+    html:not(.dark) #reservation-modal #modal-tradein-card p.font-bold,
+    html:not(.dark) #reservation-modal .border-slate-800.bg-slate-900\/40 p.font-bold {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #reservation-modal #modal-price-box,
+    html:not(.dark) #reservation-modal .p-4.rounded-2xl.bg-slate-900 {
+      background-color: #f5f5f7 !important;
+      border-color: #e5e5ea !important;
+    }
+    html:not(.dark) #reservation-modal #modal-price-box button,
+    html:not(.dark) #reservation-modal .p-4.rounded-2xl.bg-slate-900 button {
+      background-color: #1d1d1f !important;
+      color: #ffffff !important;
+    }
+    html:not(.dark) #reservation-modal #modal-price-box button:hover,
+    html:not(.dark) #reservation-modal .p-4.rounded-2xl.bg-slate-900 button:hover {
+      background-color: #000000 !important;
+    }
+    html:not(.dark) #reservation-modal button[onclick*="closeReservationModal"],
+    html:not(.dark) #pricing-modal button[onclick*="closePricingModal"] {
+      border-color: #d2d2d7 !important;
+      background-color: #f2f2f7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #reservation-modal button[onclick*="closeReservationModal"]:hover,
+    html:not(.dark) #pricing-modal button[onclick*="closePricingModal"]:hover {
+      background-color: #e5e5ea !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div {
+      background-color: #fbfbfd !important;
+      border-color: #e5e5ea !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div h4 {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div span.text-white {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div p.text-slate-400 {
+      color: #515154 !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div button {
+      background-color: #1d1d1f !important;
+      color: #ffffff !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div button:hover {
+      background-color: #000000 !important;
+    }
+
+    /* 9. Floating Chatbot */
+    html:not(.dark) #chatbot-window {
+      background-color: rgba(255, 255, 255, 0.98) !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16) !important;
+    }
+    html:not(.dark) #chatbot-window .bg-slate-950\/60 {
+      background-color: #f5f5f7 !important;
+      border-bottom-color: #e5e5ea !important;
+    }
+    html:not(.dark) #chatbot-window .bg-slate-950\/60 button.bg-slate-800 {
+      background-color: #ffffff !important;
+      border: 1px solid #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #chatbot-window .bg-slate-950\/60 button.bg-slate-800:hover {
+      background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #chat-messages [class*="bg-slate-800"] {
+      background-color: #f2f2f7 !important;
+      border-color: #e5e5ea !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #chat-messages [class*="bg-slate-800"] strong {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #chat-messages [class*="bg-slate-800"] li {
+      color: #424245 !important;
+    }
+    html:not(.dark) #chat-form {
+      background-color: #ffffff !important;
+      border-top-color: #e5e5ea !important;
+    }
+    html:not(.dark) #chat-input {
+      background-color: #f5f5f7 !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #chat-input::placeholder {
+      color: #86868b !important;
     }
   </style>
 </head>
@@ -962,28 +1546,30 @@
   <!-- ========================================================================= -->
   <!-- MODAL: RESERVATION / PRE-ORDER CONFIGURATOR -->
   <!-- ========================================================================= -->
-  <div id="reservation-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-black/75 overflow-y-auto">
-    <div class="relative w-full max-w-2xl rounded-3xl border border-slate-800 bg-[#0f1015] text-slate-100 shadow-2xl overflow-hidden my-8">
+  <div id="reservation-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 backdrop-blur-md bg-black/75 overflow-y-auto">
+    <div id="reservation-modal-dialog" class="modal-dialog relative w-full max-w-lg rounded-2xl sm:rounded-3xl border border-slate-800 bg-[#0f1015] text-slate-100 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
       
-      <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+      <!-- Sticky Modal Header: Always visible, never obscured -->
+      <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/80 shrink-0">
         <div class="flex items-center gap-3">
-          <span class="text-2xl"></span>
+          <span class="text-xl"></span>
           <div>
-            <h3 class="font-bold text-lg" id="modal-product-title">Pré-Reserva Prioritária</h3>
-            <p class="text-xs text-slate-400">Atribuição de lote prioritário para Portugal</p>
+            <h3 class="font-bold text-base sm:text-lg leading-tight" id="modal-product-title">Pré-Reserva Prioritária</h3>
+            <p class="text-[11px] sm:text-xs text-slate-400">Atribuição de lote prioritário para Portugal</p>
           </div>
         </div>
-        <button onclick="closeReservationModal()" class="p-2 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer">
+        <button onclick="closeReservationModal()" class="p-1.5 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer" aria-label="Fechar">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <div class="p-6 sm:p-8 space-y-6">
-        <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-5">
+      <!-- Compact Scrollable Form Content -->
+      <div class="p-4 sm:p-5 overflow-y-auto flex-1 overscroll-contain">
+        <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-3">
           
           <div>
-            <label class="block text-xs font-mono uppercase text-slate-400 mb-2 font-semibold">1. Modelo Escolhido</label>
-            <select id="modal-select-product" class="w-full text-xs px-3.5 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500" onchange="updateModalPrice()">
+            <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1 font-semibold">1. Modelo Escolhido</label>
+            <select id="modal-select-product" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500" onchange="updateModalPrice()">
               <option value="iphone-18-pro">iPhone 18 Pro (Desde 1.349 € / 44,95 € mês)</option>
               <option value="iphone-duo">iPhone Duo Dobrável (Desde 1.899 € / 63,30 € mês)</option>
               <option value="watch-series-12">Apple Watch Series 12 (Desde 459 € / 15,30 € mês)</option>
@@ -992,10 +1578,10 @@
             </select>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-mono uppercase text-slate-400 mb-2 font-semibold">2. Acabamento / Cor</label>
-              <select id="modal-select-color" class="w-full text-xs px-3.5 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+              <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1 font-semibold">2. Acabamento / Cor</label>
+              <select id="modal-select-color" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
                 <option value="burgundy">Titanium Burgundy Deep</option>
                 <option value="black">Titânio Preto Espacial</option>
                 <option value="natural">Titânio Natural</option>
@@ -1003,8 +1589,8 @@
               </select>
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase text-slate-400 mb-2 font-semibold">3. Capacidade</label>
-              <select id="modal-select-storage" class="w-full text-xs px-3.5 py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500" onchange="updateModalPrice()">
+              <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1 font-semibold">3. Capacidade</label>
+              <select id="modal-select-storage" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500" onchange="updateModalPrice()">
                 <option value="256">256 GB (Incluído)</option>
                 <option value="512">512 GB (+ 240 €)</option>
                 <option value="1024">1 TB (+ 480 €)</option>
@@ -1013,19 +1599,19 @@
           </div>
 
           <!-- Trade-in check -->
-          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 flex items-center justify-between">
+          <div id="modal-tradein-card" class="p-2.5 sm:p-3 rounded-xl border border-slate-800 bg-slate-900/40 flex items-center justify-between">
             <div>
               <p class="text-xs font-bold text-slate-200">Apple Trade In (Troca de equipamento)</p>
               <p class="text-[11px] text-slate-400">Poupe até 350 € com desconto imediato.</p>
             </div>
-            <input type="checkbox" id="modal-tradein" onchange="updateModalPrice()" class="w-4 h-4 rounded text-rose-500 focus:ring-rose-500">
+            <input type="checkbox" id="modal-tradein" onchange="updateModalPrice()" class="w-4 h-4 rounded text-rose-500 focus:ring-rose-500 cursor-pointer">
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-            <input type="text" id="res-name" required placeholder="Nome Completo" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
-            <input type="email" id="res-email" required placeholder="E-mail" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
-            <input type="tel" id="res-phone" required placeholder="Telemóvel (+351)" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
-            <select id="res-city" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-0.5">
+            <input type="text" id="res-name" required placeholder="Nome Completo" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+            <input type="email" id="res-email" required placeholder="E-mail" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+            <input type="tel" id="res-phone" required placeholder="Telemóvel (+351)" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+            <select id="res-city" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
               <option value="Lisboa">Entrega: Lisboa & Vale do Tejo</option>
               <option value="Porto">Entrega: Porto & Norte</option>
               <option value="Coimbra">Entrega: Coimbra & Centro</option>
@@ -1034,13 +1620,13 @@
             </select>
           </div>
 
-          <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+          <div id="modal-price-box" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between gap-3">
             <div>
               <span class="text-[10px] font-mono text-slate-400 uppercase">Total Previsto:</span>
-              <p class="text-2xl font-black text-rose-400" id="modal-total-price">1.349 €</p>
-              <p class="text-[11px] text-slate-400" id="modal-installment-text">ou em 24x de 56,20 €/mês sem juros</p>
+              <p class="text-xl sm:text-2xl font-black text-rose-400 leading-tight" id="modal-total-price">1.349 €</p>
+              <p class="text-[10px] sm:text-[11px] text-slate-400" id="modal-installment-text">ou em 24x de 56,20 €/mês sem juros</p>
             </div>
-            <button type="submit" class="px-6 py-3 rounded-full bg-slate-100 hover:bg-white text-slate-950 font-bold text-xs transition cursor-pointer shadow-lg shadow-white/5">
+            <button type="submit" class="px-5 py-2.5 rounded-full bg-slate-100 hover:bg-white text-slate-950 font-bold text-xs transition cursor-pointer shadow-lg shadow-white/5 whitespace-nowrap">
               Confirmar Reserva
             </button>
           </div>
@@ -1053,7 +1639,7 @@
           </div>
           <h4 class="text-lg font-bold text-white">Reserva Registada com Prioridade!</h4>
           <p class="text-xs text-slate-300" id="res-voucher-code"></p>
-          <button onclick="closeReservationModal()" class="px-6 py-2.5 rounded-full bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer mt-4">
+          <button onclick="closeReservationModal()" class="px-6 py-2 rounded-full bg-slate-100 text-slate-950 font-bold text-xs hover:bg-white transition cursor-pointer mt-4">
             Fechar
           </button>
         </div>
@@ -1066,20 +1652,20 @@
   <!-- ========================================================================= -->
   <!-- MODAL: PRICING & MODELS -->
   <!-- ========================================================================= -->
-  <div id="pricing-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-black/75 overflow-y-auto">
-    <div class="relative w-full max-w-4xl rounded-3xl border border-slate-800 bg-[#0e0f14] text-slate-100 shadow-2xl overflow-hidden my-8">
+  <div id="pricing-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 backdrop-blur-md bg-black/75 overflow-y-auto">
+    <div id="pricing-modal-dialog" class="modal-dialog relative w-full max-w-4xl rounded-2xl sm:rounded-3xl border border-slate-800 bg-[#0e0f14] text-slate-100 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
       
-      <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+      <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/60 shrink-0">
         <div>
           <span class="text-xs font-mono uppercase text-rose-400 font-bold">Catálogo Oficial Portugal</span>
-          <h3 class="text-xl font-bold">Tabela de Preços e Modelos 2026</h3>
+          <h3 class="text-lg sm:text-xl font-bold">Tabela de Preços e Modelos 2026</h3>
         </div>
-        <button onclick="closePricingModal()" class="p-2 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer">
+        <button onclick="closePricingModal()" class="p-1.5 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer" aria-label="Fechar">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <div class="p-6 sm:p-8 space-y-4 max-h-[75vh] overflow-y-auto">
+      <div class="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1 overscroll-contain">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
@@ -1555,6 +2141,11 @@
       updateModalPrice();
       modal?.classList.remove('hidden');
       modal?.classList.add('flex');
+      if (modal) {
+        modal.scrollTop = 0;
+        const scrollable = modal.querySelector('.overflow-y-auto');
+        if (scrollable) scrollable.scrollTop = 0;
+      }
     }
 
     function closeReservationModal() {
@@ -1567,6 +2158,11 @@
       const modal = document.getElementById('pricing-modal');
       modal?.classList.remove('hidden');
       modal?.classList.add('flex');
+      if (modal) {
+        modal.scrollTop = 0;
+        const scrollable = modal.querySelector('.overflow-y-auto');
+        if (scrollable) scrollable.scrollTop = 0;
+      }
     }
 
     function closePricingModal() {
@@ -1617,26 +2213,48 @@
     // -------------------------------------------------------------
     // DARK / LIGHT THEME TOGGLE
     // -------------------------------------------------------------
-    function toggleTheme() {
+    function applyTheme(isDark) {
       const html = document.documentElement;
       const sun = document.getElementById('sun-icon');
       const moon = document.getElementById('moon-icon');
 
-      if (html.classList.contains('dark')) {
-        html.classList.remove('dark');
-        sun?.classList.remove('hidden');
-        moon?.classList.add('hidden');
-      } else {
+      if (isDark) {
         html.classList.add('dark');
         sun?.classList.add('hidden');
         moon?.classList.remove('hidden');
+        localStorage.setItem('apple_theme_pref', 'dark');
+      } else {
+        html.classList.remove('dark');
+        sun?.classList.remove('hidden');
+        moon?.classList.add('hidden');
+        localStorage.setItem('apple_theme_pref', 'light');
       }
+
+      // Update Cal.com embedded theme if initialized
+      try {
+        if (window.Cal && window.Cal.ns && window.Cal.ns["30min"]) {
+          window.Cal.ns["30min"]("ui", { theme: isDark ? "dark" : "light" });
+        }
+      } catch (e) {
+        // Silently continue if Cal.com is still loading
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(!isDark);
     }
 
     // -------------------------------------------------------------
     // INITIALIZATION
     // -------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('apple_theme_pref');
+      if (savedTheme === 'light') {
+        applyTheme(false);
+      } else {
+        applyTheme(true);
+      }
       renderFaqAccordion();
       initCalComScheduler();
     });
