@@ -76,8 +76,30 @@
     }
 
     /* Smooth transitions between light and dark */
-    body, header, section, footer, div, p, h1, h2, h3, h4, h5, span, input, select, button {
+    body, header, section, footer, .modal-dialog, input, select, button, #chatbot-window {
       transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    /* Select option native theme handling */
+    select option {
+      background-color: #0f1015;
+      color: #f1f5f9;
+    }
+
+    /* ======================================================== */
+    /* APPLE DARK MODE POLISH (Rich Titanium & Atmospheric Depth)*/
+    /* ======================================================== */
+    .dark input:focus, 
+    .dark select:focus {
+      border-color: #e05375 !important;
+      box-shadow: 0 0 0 2px rgba(224, 83, 117, 0.25) !important;
+    }
+
+    .dark #personas .grid > div:hover,
+    .dark #features .grid > div:hover,
+    .dark #pricing-modal .grid > div:hover {
+      border-color: rgba(224, 83, 117, 0.35);
+      box-shadow: 0 12px 32px -8px rgba(157, 23, 59, 0.2);
     }
 
     /* ======================================================== */
@@ -92,6 +114,11 @@
       color: #1d1d1f !important;
     }
 
+    html:not(.dark) select option {
+      background-color: #ffffff !important;
+      color: #1d1d1f !important;
+    }
+
     html:not(.dark) ::-webkit-scrollbar-track {
       background: #f5f5f7 !important;
     }
@@ -100,6 +127,49 @@
     }
     html:not(.dark) ::-webkit-scrollbar-thumb:hover {
       background: #aeaeb2 !important;
+    }
+
+    /* Safe typography contrast fallbacks in light mode */
+    html:not(.dark) h1, 
+    html:not(.dark) h2, 
+    html:not(.dark) h3, 
+    html:not(.dark) h4, 
+    html:not(.dark) h5, 
+    html:not(.dark) h6 {
+      color: #1d1d1f;
+    }
+    html:not(.dark) p {
+      color: #424245;
+    }
+    html:not(.dark) .text-slate-400,
+    html:not(.dark) .text-slate-500 {
+      color: #6e6e73 !important;
+    }
+    html:not(.dark) .text-slate-300 {
+      color: #424245 !important;
+    }
+    html:not(.dark) .text-slate-200,
+    html:not(.dark) .text-slate-100 {
+      color: #1d1d1f !important;
+    }
+
+    /* Containers that intentionally remain dark / titanium in both modes */
+    html:not(.dark) #top-announcement-banner {
+      color: #f8fafc !important;
+    }
+    html:not(.dark) #top-announcement-banner span {
+      color: #f1f5f9 !important;
+    }
+    html:not(.dark) #top-announcement-banner span.bg-rose-500\/20 {
+      background-color: rgba(224, 83, 117, 0.25) !important;
+      color: #ffe4e6 !important;
+      border-color: rgba(224, 83, 117, 0.5) !important;
+    }
+    html:not(.dark) #top-announcement-banner button {
+      color: #fecdd3 !important;
+    }
+    html:not(.dark) #top-announcement-banner button:hover {
+      color: #ffffff !important;
     }
 
     /* 1. Header & Navigation */
@@ -121,6 +191,14 @@
       background: none !important;
       -webkit-text-fill-color: initial !important;
       color: #1d1d1f !important;
+    }
+    html:not(.dark) #main-navbar span.text-2xl {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #main-navbar span[class*="border-rose-500"] {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9d173b !important;
     }
     html:not(.dark) #theme-toggle {
       background-color: #ffffff !important;
@@ -152,6 +230,11 @@
     html:not(.dark) #hero p {
       color: #424245 !important;
     }
+    html:not(.dark) #hero .inline-flex.rounded-full {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9f1239 !important;
+    }
     html:not(.dark) #hero button[onclick*="openReservationModal"] {
       background-color: #1d1d1f !important;
       color: #ffffff !important;
@@ -170,14 +253,48 @@
       background-color: #f2f2f7 !important;
     }
     html:not(.dark) #hero .relative.max-w-5xl {
-      background-color: rgba(255, 255, 255, 0.8) !important;
+      background-color: rgba(255, 255, 255, 0.95) !important;
       border-color: rgba(0, 0, 0, 0.08) !important;
       box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07) !important;
     }
     /* Inner titanium showcase keeps deep burgundy contrast */
     html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl {
       background: linear-gradient(145deg, #1b030b 0%, #2e0513 50%, #160209 100%) !important;
-      border-color: rgba(224, 83, 117, 0.25) !important;
+      border-color: rgba(224, 83, 117, 0.3) !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl h3 {
+      color: #ffffff !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl p.text-rose-300 {
+      color: #fda4af !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl p.text-slate-400 {
+      color: #cbd5e1 !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl span {
+      color: #f1f5f9 !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl .bg-white\/10 {
+      background-color: rgba(255, 255, 255, 0.14) !important;
+      border-color: rgba(255, 255, 255, 0.22) !important;
+      color: #ffffff !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl .w-full.md\:w-80 {
+      background: linear-gradient(135deg, #2b0310 0%, #44061a 50%, #1a020a 100%) !important;
+      border-color: rgba(224, 83, 117, 0.45) !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl .w-full.md\:w-80 p.text-white {
+      color: #ffffff !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl .w-full.md\:w-80 p.text-rose-200 {
+      color: #fecdd3 !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl .w-full.md\:w-80 button {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) #hero .relative.max-w-5xl .relative.rounded-2xl .w-full.md\:w-80 button:hover {
+      background-color: #f1f5f9 !important;
     }
 
     /* 3. Personas Section */
@@ -210,6 +327,25 @@
       background-color: #f2f2f7 !important;
       border-color: #d2d2d7 !important;
       color: #1d1d1f !important;
+    }
+    html:not(.dark) #personas .grid > div span[class*="border-purple"] {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #personas .grid > div span[class*="border-emerald"] {
+      background-color: #f0fdf4 !important;
+      border-color: #bbf7d0 !important;
+      color: #15803d !important;
+    }
+    html:not(.dark) #personas .grid > div .text-rose-400 {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #personas .grid > div .text-purple-400 {
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #personas .grid > div .text-emerald-400 {
+      color: #15803d !important;
     }
     html:not(.dark) #personas .grid > div .w-10.h-10 {
       background-color: #f2f2f7 !important;
@@ -278,20 +414,54 @@
       background-color: #f2f2f7 !important;
       color: #515154 !important;
     }
+    html:not(.dark) #features .grid > div span[class*="border-rose-500"] {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9f1239 !important;
+    }
+    html:not(.dark) #features .grid > div p.text-rose-400 {
+      color: #9d173b !important;
+    }
     html:not(.dark) #features .grid > div span.text-purple-300 {
       color: #7e22ce !important;
+      font-weight: 600;
     }
     html:not(.dark) #features .grid > div span.text-emerald-300 {
       color: #15803d !important;
+      font-weight: 600;
     }
     html:not(.dark) #features .grid > div span.text-blue-300 {
       color: #1d4ed8 !important;
+      font-weight: 600;
     }
     html:not(.dark) #features .grid > div span.text-amber-300 {
       color: #b45309 !important;
+      font-weight: 600;
     }
-    html:not(.dark) #features .grid > div span.text-rose-300 {
+    html:not(.dark) #features .grid > div div[class*="bg-rose-500"] {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
       color: #9d173b !important;
+    }
+    html:not(.dark) #features .grid > div div[class*="bg-purple-500"] {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #features .grid > div div[class*="bg-emerald-500"] {
+      background-color: #f0fdf4 !important;
+      border-color: #bbf7d0 !important;
+      color: #15803d !important;
+    }
+    html:not(.dark) #features .grid > div div[class*="bg-blue-500"] {
+      background-color: #eff6ff !important;
+      border-color: #bfdbfe !important;
+      color: #1d4ed8 !important;
+    }
+    html:not(.dark) #features .grid > div div[class*="bg-amber-500"] {
+      background-color: #fffbeb !important;
+      border-color: #fde68a !important;
+      color: #b45309 !important;
     }
     /* Education Bar in light mode */
     html:not(.dark) #features .bg-gradient-to-r.from-blue-900\/40 {
@@ -323,6 +493,11 @@
     }
     html:not(.dark) #agendamento p.text-slate-400 {
       color: #515154 !important;
+    }
+    html:not(.dark) #agendamento .inline-flex.rounded-full {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      color: #7e22ce !important;
     }
     html:not(.dark) #agendamento .rounded-3xl.border-slate-800 {
       background-color: #fcfcfd !important;
@@ -364,6 +539,7 @@
     html:not(.dark) #cal-widget-view .bg-\[\#0b0c10\] {
       background-color: #ffffff !important;
       border-color: #e5e5ea !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
     }
     /* Quick scheduler view in light mode */
     html:not(.dark) #quick-scheduler-view label {
@@ -380,6 +556,14 @@
     html:not(.dark) #calendar-days-container button.border-slate-800 span.text-slate-100 {
       color: #1d1d1f !important;
     }
+    html:not(.dark) #calendar-days-container button.border-purple-500 {
+      background-color: #faf5ff !important;
+      border-color: #9333ea !important;
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #calendar-days-container button.border-purple-500 span.text-slate-100 {
+      color: #6b21a8 !important;
+    }
     html:not(.dark) #time-slots-container button.border-slate-800 {
       background-color: #ffffff !important;
       border-color: #d2d2d7 !important;
@@ -387,6 +571,11 @@
     }
     html:not(.dark) #time-slots-container button.border-slate-800:hover {
       background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #time-slots-container button.border-rose-500 {
+      background-color: #fff1f2 !important;
+      border-color: #e11d48 !important;
+      color: #9f1239 !important;
     }
     html:not(.dark) #schedule-topic {
       background-color: #ffffff !important;
@@ -413,6 +602,16 @@
     }
     html:not(.dark) #calcom-booking-form .bg-purple-950\/20 p.text-slate-400 {
       color: #6b21a8 !important;
+    }
+    html:not(.dark) #booking-success-message {
+      background-color: #f0fdf4 !important;
+      border-color: #bbf7d0 !important;
+    }
+    html:not(.dark) #booking-success-message h5 {
+      color: #166534 !important;
+    }
+    html:not(.dark) #booking-success-message p {
+      color: #14532d !important;
     }
 
     /* 6. FAQ Section */
@@ -471,6 +670,11 @@
     html:not(.dark) #cta {
       background: linear-gradient(180deg, #f5f5f7 0%, #faf3f5 50%, #ffffff 100%) !important;
     }
+    html:not(.dark) #cta span.font-mono {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9f1239 !important;
+    }
     html:not(.dark) #cta h2 {
       color: #1d1d1f !important;
     }
@@ -507,6 +711,15 @@
     }
     html:not(.dark) #cta .border-t.border-slate-800\/80 p {
       color: #515154 !important;
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 .text-rose-400 {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 .text-emerald-400 {
+      color: #15803d !important;
+    }
+    html:not(.dark) #cta .border-t.border-slate-800\/80 .text-blue-400 {
+      color: #1d4ed8 !important;
     }
     html:not(.dark) footer {
       background-color: #f5f5f7 !important;
@@ -557,6 +770,7 @@
     html:not(.dark) #reservation-modal input:focus,
     html:not(.dark) #reservation-modal select:focus {
       border-color: #9d173b !important;
+      box-shadow: 0 0 0 3px rgba(157, 23, 59, 0.12) !important;
     }
     html:not(.dark) #reservation-modal input::placeholder {
       color: #86868b !important;
@@ -574,6 +788,13 @@
     html:not(.dark) #reservation-modal .p-4.rounded-2xl.bg-slate-900 {
       background-color: #f5f5f7 !important;
       border-color: #e5e5ea !important;
+    }
+    html:not(.dark) #reservation-modal #modal-price-box p#modal-total-price {
+      color: #9d173b !important;
+      font-weight: 800 !important;
+    }
+    html:not(.dark) #reservation-modal #modal-price-box p#modal-installment-text {
+      color: #6e6e73 !important;
     }
     html:not(.dark) #reservation-modal #modal-price-box button,
     html:not(.dark) #reservation-modal .p-4.rounded-2xl.bg-slate-900 button {
@@ -594,9 +815,21 @@
     html:not(.dark) #pricing-modal button[onclick*="closePricingModal"]:hover {
       background-color: #e5e5ea !important;
     }
+    html:not(.dark) #reservation-success {
+      background-color: #f0fdf4 !important;
+      border-color: #bbf7d0 !important;
+      border-radius: 1rem;
+    }
+    html:not(.dark) #reservation-success h4 {
+      color: #166534 !important;
+    }
+    html:not(.dark) #reservation-success p {
+      color: #14532d !important;
+    }
     html:not(.dark) #pricing-modal .grid > div {
-      background-color: #fbfbfd !important;
+      background-color: #ffffff !important;
       border-color: #e5e5ea !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
     }
     html:not(.dark) #pricing-modal .grid > div h4 {
       color: #1d1d1f !important;
@@ -606,6 +839,18 @@
     }
     html:not(.dark) #pricing-modal .grid > div p.text-slate-400 {
       color: #515154 !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div span.text-rose-400 {
+      color: #9d173b !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div span.text-purple-400 {
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div span.text-emerald-400 {
+      color: #15803d !important;
+    }
+    html:not(.dark) #pricing-modal .grid > div span.text-blue-400 {
+      color: #1d4ed8 !important;
     }
     html:not(.dark) #pricing-modal .grid > div button {
       background-color: #1d1d1f !important;
@@ -625,13 +870,21 @@
       background-color: #f5f5f7 !important;
       border-bottom-color: #e5e5ea !important;
     }
-    html:not(.dark) #chatbot-window .bg-slate-950\/60 button.bg-slate-800 {
+    html:not(.dark) #chatbot-window .bg-slate-950\/60 button {
       background-color: #ffffff !important;
       border: 1px solid #d2d2d7 !important;
       color: #1d1d1f !important;
     }
-    html:not(.dark) #chatbot-window .bg-slate-950\/60 button.bg-slate-800:hover {
+    html:not(.dark) #chatbot-window .bg-slate-950\/60 button:hover {
       background-color: #f2f2f7 !important;
+    }
+    html:not(.dark) #chatbot-window .bg-slate-950\/60 button[class*="bg-purple"] {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      color: #7e22ce !important;
+    }
+    html:not(.dark) #chat-messages {
+      background-color: #ffffff !important;
     }
     html:not(.dark) #chat-messages [class*="bg-slate-800"] {
       background-color: #f2f2f7 !important;
@@ -644,8 +897,13 @@
     html:not(.dark) #chat-messages [class*="bg-slate-800"] li {
       color: #424245 !important;
     }
+    html:not(.dark) #chat-messages div[class*="bg-rose-500"] {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9d173b !important;
+    }
     html:not(.dark) #chat-form {
-      background-color: #ffffff !important;
+      background-color: #fbfbfd !important;
       border-top-color: #e5e5ea !important;
     }
     html:not(.dark) #chat-input {
@@ -1472,7 +1730,7 @@
           </div>
           <div>
             <h4 class="font-bold text-sm text-white">Apple Portugal</h4>
-            <p class="text-[11px] text-rose-300 font-mono">Suporte Inteligente • Google AI Studio</p>
+            <p class="text-[11px] text-rose-300 font-mono">Especialista Apple Portugal • Suporte Oficial</p>
           </div>
         </div>
         <button onclick="toggleChatbot()" class="p-1.5 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
@@ -2231,13 +2489,16 @@
       }
 
       // Update Cal.com embedded theme if initialized
-      try {
-        if (window.Cal && window.Cal.ns && window.Cal.ns["30min"]) {
-          window.Cal.ns["30min"]("ui", { theme: isDark ? "dark" : "light" });
-        }
-      } catch (e) {
-        // Silently continue if Cal.com is still loading
-      }
+      const syncCalTheme = () => {
+        try {
+          if (window.Cal && window.Cal.ns && window.Cal.ns["30min"]) {
+            window.Cal.ns["30min"]("ui", { theme: isDark ? "dark" : "light" });
+          }
+        } catch (e) {}
+      };
+      syncCalTheme();
+      setTimeout(syncCalTheme, 500);
+      setTimeout(syncCalTheme, 1500);
     }
 
     function toggleTheme() {
