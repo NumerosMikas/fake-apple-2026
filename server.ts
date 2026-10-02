@@ -304,15 +304,13 @@ async function startServer() {
       const uid = user.localId;
       const email = (user.email || "").toLowerCase();
 
-      // Authorization check against ADMIN_UID or student runtime email
+      // Authorization check against ADMIN_UID or student email from environment variables
       const envAdminUid = process.env.ADMIN_UID?.trim();
-      const studentEmail = (process.env.EMAIL_ALUNO || "miguel.donasantos@gmail.com").toLowerCase();
-      const runtimeEmail = "miguel.donasantos@gmail.com";
+      const studentEmail = process.env.EMAIL_ALUNO?.trim().toLowerCase();
 
       const isAuthorized =
         (envAdminUid && uid === envAdminUid) ||
-        email === studentEmail ||
-        email === runtimeEmail;
+        (studentEmail && email === studentEmail);
 
       if (!isAuthorized) {
         console.warn(`Tentativa de acesso não autorizado: UID=${uid}, Email=${email}`);

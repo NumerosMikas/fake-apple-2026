@@ -404,6 +404,13 @@
     </div>
   </div>
 
+  <!-- Non-intrusive Toast Notification (No window.alert) -->
+  <div id="admin-toast" class="fixed bottom-6 right-6 z-50 hidden max-w-md px-4 py-3 rounded-2xl shadow-2xl border text-xs flex items-center gap-3 transition-all duration-300 transform translate-y-2">
+    <span id="admin-toast-icon">ℹ️</span>
+    <span id="admin-toast-text" class="flex-1 font-medium leading-relaxed"></span>
+    <button onclick="document.getElementById('admin-toast').classList.add('hidden')" class="opacity-60 hover:opacity-100 text-sm font-bold ml-2">✕</button>
+  </div>
+
   <!-- Firebase Web SDK Modular Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
@@ -485,10 +492,35 @@
       carregarCatalogo();
     }
 
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('admin-toast');
+      const icon = document.getElementById('admin-toast-icon');
+      const text = document.getElementById('admin-toast-text');
+      if (!toast) return;
+
+      text.textContent = message;
+      if (type === 'error') {
+        icon.textContent = '⚠️';
+        toast.className = 'fixed bottom-6 right-6 z-50 max-w-md px-4 py-3 rounded-2xl shadow-2xl border text-xs flex items-center gap-3 transition-all duration-300 bg-rose-950/90 text-rose-200 border-rose-800 backdrop-blur-md';
+      } else if (type === 'success') {
+        icon.textContent = '✅';
+        toast.className = 'fixed bottom-6 right-6 z-50 max-w-md px-4 py-3 rounded-2xl shadow-2xl border text-xs flex items-center gap-3 transition-all duration-300 bg-emerald-950/90 text-emerald-200 border-emerald-800 backdrop-blur-md';
+      } else {
+        icon.textContent = 'ℹ️';
+        toast.className = 'fixed bottom-6 right-6 z-50 max-w-md px-4 py-3 rounded-2xl shadow-2xl border text-xs flex items-center gap-3 transition-all duration-300 bg-slate-900/90 text-slate-200 border-slate-700 backdrop-blur-md';
+      }
+
+      toast.classList.remove('hidden');
+      clearTimeout(window.__toastTimeout);
+      window.__toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 5000);
+    }
+
     window.copiarUid = function() {
       if (currentUser) {
         navigator.clipboard.writeText(currentUser.uid);
-        alert(`UID copiado para a área de transferência:\n${currentUser.uid}\n\nPode agora configurar ADMIN_UID com este valor no seu ambiente.`);
+        showToast(`UID copiado para a área de transferência: ${currentUser.uid}`, 'success');
       }
     };
 
@@ -724,7 +756,7 @@
       });
 
       if (itens.length === 0) {
-        alert("Selecione pelo menos um item para aprovar a proposta.");
+        showToast("Selecione pelo menos um item para aprovar a proposta.", "error");
         return;
       }
 
@@ -744,17 +776,16 @@
           throw new Error(err.error || "Falha ao aprovar proposta");
         }
 
-        alert("Proposta aprovada e criada com sucesso! Notificação enviada para o email do aluno.");
+        showToast("Proposta aprovada e criada com sucesso! Notificação enviada para o email do aluno.", "success");
         fecharModalDetalhes();
         carregarPedidos();
       } catch (err) {
-        alert(`Erro: ${err.message}`);
+        showToast(`Erro: ${err.message}`, "error");
       }
     };
 
     window.repetirInterpretacaoIA = async function() {
       if (!currentPedidoSelecionado) return;
-      if (!confirm("Deseja reexecutar a análise do Gemini e recálculo da proposta para este pedido?")) return;
       try {
         const token = currentIdToken || (await currentUser?.getIdToken());
         const res = await fetch(`/api/admin/pedidos/${currentPedidoSelecionado.id}/reprocessar`, {
@@ -762,11 +793,11 @@
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!res.ok) throw new Error("Falha ao reprocessar");
-        alert("Pedido reprocessado pela IA com sucesso.");
+        showToast("Pedido reprocessado pela IA com sucesso.", "success");
         fecharModalDetalhes();
         carregarPedidos();
       } catch (err) {
-        alert(`Erro: ${err.message}`);
+        showToast(`Erro: ${err.message}`, "error");
       }
     };
 
@@ -780,11 +811,11 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Falha ao reenviar notificação");
-        alert(`Resultado do reenvio: ${data.notificacao.estado}. Resend ID: ${data.notificacao.resendId || 'N/A'}`);
+        showToast(`Resultado do reenvio: ${data.notificacao.estado}. Resend ID: ${data.notificacao.resendId || 'N/A'}`, "success");
         fecharModalDetalhes();
         carregarPedidos();
       } catch (err) {
-        alert(`Erro: ${err.message}`);
+        showToast(`Erro: ${err.message}`, "error");
       }
     };
 
@@ -902,8 +933,9 @@
         if (!res.ok) throw new Error("Erro ao guardar item no catálogo");
         fecharModalCatalogo();
         carregarCatalogo();
+        showToast("Item de catálogo guardado com sucesso.", "success");
       } catch (err) {
-        alert(`Erro: ${err.message}`);
+        showToast(`Erro: ${err.message}`, "error");
       }
     };
 
@@ -923,8 +955,9 @@
         });
         if (!res.ok) throw new Error("Erro ao alterar estado do item");
         carregarCatalogo();
+        showToast(`Item ${item.nome} ${novoAtivo ? 'ativado' : 'desativado'}.`, "info");
       } catch (err) {
-        alert(`Erro: ${err.message}`);
+        showToast(`Erro: ${err.message}`, "error");
       }
     };
 
