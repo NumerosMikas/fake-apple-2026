@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Administração • Pedidos & Propostas | Apple Portugal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            appleDark: '#0a0a0c',
+            appleCard: '#121318',
+            burgundy: {
+              400: '#e05375',
+              500: '#c5284f',
+              600: '#9d173b',
+              800: '#5c0f24',
+              900: '#380614',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'system-ui', 'sans-serif'],
+            mono: ['"SF Mono"', 'Menlo', 'Monaco', 'Courier New', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0c; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+  </style>
+</head>
+<body class="bg-[#0a0a0c] text-slate-100 min-h-screen font-sans antialiased">
+
+  <!-- ========================================================================= -->
+  <!-- LOGIN SCREEN (UNAUTHENTICATED) -->
+  <!-- ========================================================================= -->
+  <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full rounded-3xl border border-slate-800 bg-[#121318] p-8 text-center shadow-2xl">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-rose-600 to-purple-600 text-white flex items-center justify-center text-3xl mx-auto mb-6 shadow-lg">
+        
+      </div>
+      <h1 class="text-2xl font-bold tracking-tight mb-2">Painel de Administração</h1>
+      <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+        Gestão de pedidos de proposta com Inteligência Artificial, catálogo comercial e notificações internas.
+      </p>
+
+      <div class="mb-6 p-3.5 rounded-xl border border-purple-500/30 bg-purple-950/20 text-purple-300 text-xs text-left">
+        <p class="font-semibold mb-1">🔐 Acesso Restrito:</p>
+        <p class="text-[11px] text-slate-400">
+          Autentique-se com a sua conta Google para aceder aos pedidos e catálogo. Apenas o utilizador configurado como administrador tem permissões ativas.
+        </p>
+      </div>
+
+      <button 
+        id="btn-google-login" 
+        onclick="loginWithGoogle()" 
+        class="w-full py-3.5 px-6 rounded-full bg-white text-slate-950 font-bold text-sm hover:bg-slate-200 transition shadow flex items-center justify-center gap-3 cursor-pointer"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Entrar com Conta Google</span>
+      </button>
+
+      <div id="login-error-msg" class="hidden mt-4 p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 text-xs text-rose-300 text-left">
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-slate-800 text-[11px] text-slate-500">
+        <a href="/" class="hover:underline hover:text-slate-300">&larr; Voltar à Página Principal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN ADMIN APP (AUTHENTICATED) -->
+  <!-- ========================================================================= -->
+  <div id="admin-app" class="hidden min-h-screen flex flex-col">
+    
+    <!-- Top Bar -->
+    <header class="border-b border-slate-800/80 bg-[#0d0e14] sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-6">
+          <a href="/" class="flex items-center gap-2 group">
+            <span class="text-xl"></span>
+            <span class="font-bold text-sm tracking-tight">Apple Portugal</span>
+            <span class="text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded border border-rose-500/30">ADMIN</span>
+          </a>
+
+          <!-- Navigation Tabs -->
+          <nav class="flex items-center gap-2">
+            <button 
+              id="tab-btn-pedidos" 
+              onclick="switchAdminTab('pedidos')" 
+              class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white/10 text-white transition cursor-pointer"
+            >
+              Pedidos & Propostas
+            </button>
+            <button 
+              id="tab-btn-catalogo" 
+              onclick="switchAdminTab('catalogo')" 
+              class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition cursor-pointer"
+            >
+              Catálogo Comercial
+            </button>
+          </nav>
+        </div>
+
+        <!-- User Profile & Logout -->
+        <div class="flex items-center gap-4">
+          <div class="hidden sm:flex flex-col text-right">
+            <span id="admin-user-name" class="text-xs font-bold text-slate-200"></span>
+            <span id="admin-user-email" class="text-[10px] text-slate-400 font-mono"></span>
+          </div>
+          <button 
+            onclick="logout()" 
+            class="px-3 py-1.5 rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 hover:text-white hover:bg-slate-700 text-xs font-semibold transition cursor-pointer"
+          >
+            Sair
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Context Info & Exercise Banner -->
+    <div class="bg-gradient-to-r from-purple-950/60 via-slate-950 to-rose-950/40 border-b border-slate-800/80 py-2.5 px-6">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+        <div class="flex items-center gap-2 text-slate-300">
+          <span class="text-sm">ℹ️</span>
+          <span><strong>Modo de aula:</strong> as notificações são enviadas apenas para o email do aluno. Os clientes não recebem emails.</span>
+        </div>
+        <div id="admin-uid-badge" class="font-mono text-[11px] text-purple-300 flex items-center gap-2">
+          <span>UID: <span id="display-uid" class="text-slate-200">...</span></span>
+          <button onclick="copiarUid()" class="px-2 py-0.5 rounded bg-purple-900/50 hover:bg-purple-800 text-[10px] text-purple-200 border border-purple-700 transition cursor-pointer" title="Copiar UID para configurar ADMIN_UID">
+            Copiar UID
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-1 w-full">
+
+      <!-- ========================================================================= -->
+      <!-- TAB 1: PEDIDOS & PROPOSTAS -->
+      <!-- ========================================================================= -->
+      <section id="tab-pedidos-section">
+        
+        <!-- Controls Bar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight">Pedidos de Proposta</h2>
+            <p class="text-xs text-slate-400 mt-0.5">Acompanhe a interpretação da IA, aprove propostas e verifique as notificações enviadas.</p>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto p-1 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <button onclick="filtrarPedidos('todos')" class="filter-btn px-3 py-1.5 rounded-lg font-semibold bg-white/10 text-white transition cursor-pointer" data-filter="todos">Todos</button>
+            <button onclick="filtrarPedidos('recebido')" class="filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition cursor-pointer" data-filter="recebido">Recebido</button>
+            <button onclick="filtrarPedidos('em_analise')" class="filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition cursor-pointer" data-filter="em_analise">Em Análise</button>
+            <button onclick="filtrarPedidos('necessita_revisao')" class="filter-btn px-3 py-1.5 rounded-lg font-medium text-amber-400 hover:text-amber-300 transition cursor-pointer" data-filter="necessita_revisao">Necessita de Revisão</button>
+            <button onclick="filtrarPedidos('proposta_criada')" class="filter-btn px-3 py-1.5 rounded-lg font-medium text-emerald-400 hover:text-emerald-300 transition cursor-pointer" data-filter="proposta_criada">Proposta Criada</button>
+            <button onclick="filtrarPedidos('erro')" class="filter-btn px-3 py-1.5 rounded-lg font-medium text-rose-400 hover:text-rose-300 transition cursor-pointer" data-filter="erro">Erro</button>
+          </div>
+        </div>
+
+        <!-- Pedidos Table -->
+        <div class="rounded-2xl border border-slate-800 bg-[#121318] overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 font-mono uppercase tracking-wider bg-slate-950/40 text-[11px]">
+                  <th class="py-3.5 px-4">Data</th>
+                  <th class="py-3.5 px-4">Cliente</th>
+                  <th class="py-3.5 px-4">Resumo do Pedido</th>
+                  <th class="py-3.5 px-4 text-center">Estado do Pedido</th>
+                  <th class="py-3.5 px-4 text-right">Valor Proposta</th>
+                  <th class="py-3.5 px-4 text-center">Notificação ao Aluno</th>
+                  <th class="py-3.5 px-4 text-center">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="pedidos-table-body" class="divide-y divide-slate-800/60">
+                <tr>
+                  <td colspan="7" class="py-12 text-center text-slate-500">
+                    A carregar pedidos de proposta...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 2: CATÁLOGO COMERCIAL -->
+      <!-- ========================================================================= -->
+      <section id="tab-catalogo-section" class="hidden">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight">Catálogo Comercial</h2>
+            <p class="text-xs text-slate-400 mt-0.5">A fonte da verdade para produtos, unidades e preços unitários utilizados pela IA e pelo backend.</p>
+          </div>
+          <button 
+            onclick="abrirModalNovoItemCatalogo()" 
+            class="px-4 py-2 rounded-xl bg-white text-slate-950 font-bold text-xs hover:bg-slate-200 transition shadow flex items-center gap-2 cursor-pointer self-start"
+          >
+            <span>+ Adicionar Produto / Serviço</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="catalogo-cards-container">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: DETALHES DO PEDIDO & RESOLUÇÃO DE REVISÃO -->
+  <!-- ========================================================================= -->
+  <div id="modal-pedido-detalhes" class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-black/80 overflow-y-auto">
+    <div class="relative w-full max-w-2xl rounded-3xl border border-slate-800 bg-[#121318] text-slate-100 shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col">
+      
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/60 shrink-0">
+        <div>
+          <span class="text-[10px] font-mono uppercase text-slate-400 font-bold" id="detalhe-pedido-id">Ref. Pedido</span>
+          <h3 class="text-lg font-bold" id="detalhe-pedido-nome">Detalhes do Pedido</h3>
+        </div>
+        <button onclick="fecharModalDetalhes()" class="p-1.5 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1 space-y-6 text-xs">
+        
+        <!-- Client Info & Metadata -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+          <div>
+            <span class="text-[10px] font-mono uppercase text-slate-500 block">Cliente</span>
+            <span class="font-bold text-slate-200" id="detalhe-nome-val"></span>
+          </div>
+          <div>
+            <span class="text-[10px] font-mono uppercase text-slate-500 block">Email</span>
+            <span class="font-mono text-slate-300" id="detalhe-email-val"></span>
+          </div>
+          <div>
+            <span class="text-[10px] font-mono uppercase text-slate-500 block">Estado</span>
+            <span id="detalhe-estado-badge"></span>
+          </div>
+        </div>
+
+        <!-- Original Request -->
+        <div>
+          <h4 class="font-mono uppercase text-slate-400 font-bold mb-1.5 text-[11px]">Texto Original do Pedido</h4>
+          <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 font-mono text-slate-200 whitespace-pre-wrap leading-relaxed" id="detalhe-texto-original"></div>
+        </div>
+
+        <!-- AI Structured Interpretation -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <h4 class="font-mono uppercase text-purple-400 font-bold text-[11px]">Interpretação Estruturada da IA (Gemini)</h4>
+            <button onclick="repetirInterpretacaoIA()" class="text-[11px] font-semibold text-purple-300 hover:text-purple-200 underline cursor-pointer">
+              ↻ Repetir Processamento
+            </button>
+          </div>
+          <div class="p-4 rounded-xl bg-purple-950/15 border border-purple-800/30 space-y-3" id="detalhe-ia-container">
+            <!-- Dynamic IA content -->
+          </div>
+        </div>
+
+        <!-- Review Resolver Interface (if in necessita_revisao) -->
+        <div id="resolver-revisao-panel" class="hidden p-4 rounded-2xl bg-amber-950/20 border border-amber-600/40 space-y-4">
+          <div class="flex items-start gap-2">
+            <span class="text-base">⚠️</span>
+            <div>
+              <h4 class="font-bold text-amber-300 text-sm">Resolução Manual de Revisão</h4>
+              <p class="text-slate-300 text-[11px] mt-0.5">Selecione os produtos e indique as quantidades para recalcular e emitir a proposta oficial.</p>
+            </div>
+          </div>
+
+          <div id="revisao-itens-inputs" class="space-y-2">
+            <!-- Dynamic catalog selectors -->
+          </div>
+
+          <button onclick="adicionarLinhaRevisao()" class="text-[11px] font-semibold text-amber-400 hover:underline cursor-pointer">
+            + Adicionar outro item do catálogo
+          </button>
+
+          <div class="pt-3 border-t border-amber-800/40 flex items-center justify-between">
+            <div class="text-[11px] text-slate-400">
+              Total Calculado: <strong class="text-white text-sm font-mono" id="revisao-total-calculado">0,00 €</strong>
+            </div>
+            <button onclick="aprovarPropostaRevisao()" class="px-5 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition cursor-pointer shadow">
+              Aprovar e Emitir Proposta &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Proposal Info & Resend Action (if created) -->
+        <div id="detalhe-proposta-card" class="hidden p-4 rounded-2xl bg-emerald-950/20 border border-emerald-700/40 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-mono uppercase text-emerald-400 font-bold">Proposta Emitida</span>
+              <h5 class="text-sm font-bold text-white" id="detalhe-prop-numero"></h5>
+            </div>
+            <a id="detalhe-prop-link" href="#" target="_blank" class="px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition">
+              Abrir Proposta &rarr;
+            </a>
+          </div>
+
+          <div class="pt-2 border-t border-emerald-900/40 flex items-center justify-between text-[11px]">
+            <div>
+              <span class="text-slate-400">Notificação ao Aluno:</span>
+              <span class="font-semibold ml-1" id="detalhe-prop-notif-status"></span>
+            </div>
+            <button onclick="reenviarNotificacaoResend()" id="btn-reenviar-resend" class="text-emerald-400 hover:underline font-semibold cursor-pointer">
+              Reenviar Notificação Resend
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADICIONAR / EDITAR ITEM NO CATÁLOGO -->
+  <!-- ========================================================================= -->
+  <div id="modal-item-catalogo" class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-black/80 overflow-y-auto">
+    <div class="relative w-full max-w-lg rounded-3xl border border-slate-800 bg-[#121318] text-slate-100 shadow-2xl overflow-hidden my-auto">
+      
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <h3 class="text-base font-bold" id="catalogo-modal-title">Novo Item no Catálogo</h3>
+        <button onclick="fecharModalCatalogo()" class="p-1.5 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="form-item-catalogo" onsubmit="salvarItemCatalogo(event)" class="p-6 space-y-4 text-xs">
+        <div>
+          <label class="block font-mono uppercase text-slate-400 text-[10px] mb-1 font-bold">Identificador Único (ID)</label>
+          <input type="text" id="cat-id" required placeholder="ex: iphone-18-pro-512" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500 font-mono">
+        </div>
+
+        <div>
+          <label class="block font-mono uppercase text-slate-400 text-[10px] mb-1 font-bold">Nome do Produto ou Serviço</label>
+          <input type="text" id="cat-nome" required placeholder="ex: iPhone 18 Pro 512GB Titanium Burgundy" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-mono uppercase text-slate-400 text-[10px] mb-1 font-bold">Unidade de Venda</label>
+            <select id="cat-unidade" class="w-full px-3 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+              <option value="unidade">Unidade</option>
+              <option value="hora">Hora</option>
+              <option value="pacote">Pacote</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-mono uppercase text-slate-400 text-[10px] mb-1 font-bold">Preço Unitário em Euros (€)</label>
+            <input type="number" step="0.01" min="0" id="cat-preco" required placeholder="1349.00" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500 font-mono">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-mono uppercase text-slate-400 text-[10px] mb-1 font-bold">Descrição Detalhada</label>
+          <textarea id="cat-descricao" rows="2" required placeholder="Especificações técnicas ou escopo do serviço..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-mono uppercase text-slate-400 text-[10px] mb-1 font-bold">Condições / Limitações</label>
+          <input type="text" id="cat-condicoes" placeholder="ex: 3 anos de garantia legal integral em Portugal" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 outline-none focus:border-rose-500">
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <input type="checkbox" id="cat-ativo" checked class="w-4 h-4 rounded text-rose-600 focus:ring-rose-500">
+          <label for="cat-ativo" class="text-xs text-slate-300">Item Ativo para Novas Propostas</label>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
+          <button type="button" onclick="fecharModalCatalogo()" class="px-4 py-2 rounded-full border border-slate-700 hover:bg-slate-800 text-slate-300 font-semibold transition cursor-pointer">
+            Cancelar
+          </button>
+          <button type="submit" class="px-6 py-2 rounded-full bg-white text-slate-950 font-bold hover:bg-slate-200 transition cursor-pointer">
+            Guardar no Catálogo
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Firebase Web SDK Modular Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+    let auth = null;
+    let currentUser = null;
+    let currentIdToken = null;
+    let pedidosCache = [];
+    let catalogoCache = [];
+    let currentPedidoSelecionado = null;
+
+    async function initFirebase() {
+      try {
+        const res = await fetch('/api/admin/firebase-config');
+        const config = await res.json();
+        const app = initializeApp(config);
+        auth = getAuth(app);
+
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            currentUser = user;
+            currentIdToken = await user.getIdToken();
+            showAdminDashboard(user);
+          } else {
+            currentUser = null;
+            currentIdToken = null;
+            showLoginScreen();
+          }
+        });
+      } catch (err) {
+        console.error("Erro ao inicializar Firebase:", err);
+      }
+    }
+
+    window.loginWithGoogle = async function() {
+      const errBox = document.getElementById('login-error-msg');
+      errBox.classList.add('hidden');
+      try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        currentIdToken = await user.getIdToken();
+        // Test authorization on backend
+        const check = await fetch('/api/admin/pedidos', {
+          headers: { 'Authorization': `Bearer ${currentIdToken}` }
+        });
+        if (check.status === 403) {
+          const errData = await check.json();
+          errBox.textContent = errData.error || "Acesso negado: Este utilizador não está autorizado como administrador.";
+          errBox.classList.remove('hidden');
+          return;
+        }
+      } catch (err) {
+        console.error("Login failed:", err);
+        errBox.textContent = `Erro ao efetuar login Google: ${err.message}`;
+        errBox.classList.remove('hidden');
+      }
+    };
+
+    window.logout = async function() {
+      if (auth) await signOut(auth);
+      location.reload();
+    };
+
+    function showLoginScreen() {
+      document.getElementById('login-screen').classList.remove('hidden');
+      document.getElementById('admin-app').classList.add('hidden');
+    }
+
+    function showAdminDashboard(user) {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('admin-app').classList.remove('hidden');
+      document.getElementById('admin-user-name').textContent = user.displayName || 'Administrador';
+      document.getElementById('admin-user-email').textContent = user.email || '';
+      document.getElementById('display-uid').textContent = user.uid;
+
+      carregarPedidos();
+      carregarCatalogo();
+    }
+
+    window.copiarUid = function() {
+      if (currentUser) {
+        navigator.clipboard.writeText(currentUser.uid);
+        alert(`UID copiado para a área de transferência:\n${currentUser.uid}\n\nPode agora configurar ADMIN_UID com este valor no seu ambiente.`);
+      }
+    };
+
+    window.switchAdminTab = function(tab) {
+      const pTab = document.getElementById('tab-pedidos-section');
+      const cTab = document.getElementById('tab-catalogo-section');
+      const pBtn = document.getElementById('tab-btn-pedidos');
+      const cBtn = document.getElementById('tab-btn-catalogo');
+
+      if (tab === 'pedidos') {
+        pTab.classList.remove('hidden');
+        cTab.classList.add('hidden');
+        pBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white/10 text-white transition cursor-pointer";
+        cBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition cursor-pointer";
+        carregarPedidos();
+      } else {
+        pTab.classList.add('hidden');
+        cTab.classList.remove('hidden');
+        cBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white/10 text-white transition cursor-pointer";
+        pBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition cursor-pointer";
+        carregarCatalogo();
+      }
+    };
+
+    // ==============================================================
+    // PEDIDOS & PROPOSTAS LOGIC
+    // ==============================================================
+    async function carregarPedidos(filtro = 'todos') {
+      const tbody = document.getElementById('pedidos-table-body');
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch(`/api/admin/pedidos?filtro=${filtro}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error("Falha ao carregar pedidos");
+        const pedidos = await res.json();
+        pedidosCache = pedidos;
+        renderTabelaPedidos(pedidos);
+      } catch (err) {
+        console.error("Erro ao carregar pedidos:", err);
+        tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-rose-400">Erro ao carregar pedidos: ${err.message}</td></tr>`;
+      }
+    }
+
+    window.filtrarPedidos = function(filtro) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.dataset.filter === filtro) {
+          b.className = "filter-btn px-3 py-1.5 rounded-lg font-semibold bg-white/10 text-white transition cursor-pointer";
+        } else {
+          b.className = "filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition cursor-pointer";
+        }
+      });
+      carregarPedidos(filtro);
+    };
+
+    function renderTabelaPedidos(pedidos) {
+      const tbody = document.getElementById('pedidos-table-body');
+      if (pedidos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-12 text-center text-slate-500">Nenhum pedido encontrado neste estado.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = pedidos.map(p => {
+        const dataFmt = new Date(p.dataCriacao).toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+        const resumo = p.interpretacaoIA?.resumo || p.textoPedido.slice(0, 60) + '...';
+        
+        let badgeEstado = '';
+        if (p.estadoProcessamento === 'proposta_criada') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">Proposta Criada</span>`;
+        else if (p.estadoProcessamento === 'necessita_revisao') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold">Necessita de Revisão</span>`;
+        else if (p.estadoProcessamento === 'em_analise') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-bold">Em Análise</span>`;
+        else if (p.estadoProcessamento === 'erro') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-bold">Erro</span>`;
+        else badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 text-[10px] font-bold">Recebido</span>`;
+
+        let notifBadge = `<span class="text-slate-500">—</span>`;
+        if (p.propostaDetails?.notificacaoAluno) {
+          const st = p.propostaDetails.notificacaoAluno.estado;
+          if (st === 'aceite_pelo_servico') notifBadge = `<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono">Aceite pelo serviço</span>`;
+          else if (st === 'falhou') notifBadge = `<span class="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 text-[10px] font-mono" title="${p.propostaDetails.notificacaoAluno.erro || ''}">Falhou</span>`;
+          else if (st === 'nao_configurado') notifBadge = `<span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10px] font-mono" title="Falta configurar RESEND_API_KEY ou EMAIL_ALUNO">Não configurado</span>`;
+          else notifBadge = `<span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">Por enviar</span>`;
+        }
+
+        const totalFmt = p.propostaDetails ? formatarMoeda(p.propostaDetails.totalCentimos) : '—';
+        const linkProp = p.propostaDetails?.linkProposta ? `<a href="${p.propostaDetails.linkProposta}" target="_blank" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition">Abrir &rarr;</a>` : '';
+
+        return `
+          <tr class="hover:bg-slate-900/40 transition">
+            <td class="py-3.5 px-4 font-mono text-slate-400 whitespace-nowrap">${dataFmt}</td>
+            <td class="py-3.5 px-4 font-bold text-slate-200">${escapeText(p.nome)}<br><span class="font-normal text-slate-400 font-mono text-[11px]">${escapeText(p.email)}</span></td>
+            <td class="py-3.5 px-4 max-w-xs text-slate-300 leading-snug">${escapeText(resumo)}</td>
+            <td class="py-3.5 px-4 text-center">${badgeEstado}</td>
+            <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-200">${totalFmt}</td>
+            <td class="py-3.5 px-4 text-center">${notifBadge}</td>
+            <td class="py-3.5 px-4 text-center whitespace-nowrap">
+              <div class="flex items-center justify-center gap-2">
+                <button onclick="abrirDetalhesPedido('${p.id}')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition cursor-pointer">
+                  Detalhes
+                </button>
+                ${linkProp}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    window.abrirDetalhesPedido = function(pedidoId) {
+      const pedido = pedidosCache.find(p => p.id === pedidoId);
+      if (!pedido) return;
+      currentPedidoSelecionado = pedido;
+
+      document.getElementById('detalhe-pedido-id').textContent = `Ref: ${pedido.id}`;
+      document.getElementById('detalhe-pedido-nome').textContent = `Pedido de ${pedido.nome}`;
+      document.getElementById('detalhe-nome-val').textContent = pedido.nome;
+      document.getElementById('detalhe-email-val').textContent = pedido.email;
+      document.getElementById('detalhe-texto-original').textContent = pedido.textoPedido;
+
+      let badgeEstado = '';
+      if (pedido.estadoProcessamento === 'proposta_criada') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">Proposta Criada</span>`;
+      else if (pedido.estadoProcessamento === 'necessita_revisao') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">Necessita de Revisão</span>`;
+      else if (pedido.estadoProcessamento === 'erro') badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-bold">Erro</span>`;
+      else badgeEstado = `<span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-bold">${pedido.estadoProcessamento}</span>`;
+      document.getElementById('detalhe-estado-badge').innerHTML = badgeEstado;
+
+      // Render AI Interpretation
+      const iaContainer = document.getElementById('detalhe-ia-container');
+      if (pedido.interpretacaoIA) {
+        const ia = pedido.interpretacaoIA;
+        const itensHtml = (ia.itens || []).map(i => `
+          <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex justify-between items-center text-[11px]">
+            <div>
+              <span class="font-bold text-slate-200">${escapeText(i.catalogoId)}</span>
+              <span class="text-slate-400 block text-[10px]">Evidência: "${escapeText(i.evidencia)}"</span>
+            </div>
+            <span class="px-2 py-1 rounded bg-purple-900/40 text-purple-300 font-mono font-bold">Qtd: ${i.quantidade ?? 'N/D'}</span>
+          </div>
+        `).join('');
+
+        const faltaHtml = (ia.informacaoEmFalta || []).map(f => `<li>${escapeText(f)}</li>`).join('');
+
+        iaContainer.innerHTML = `
+          <div><strong class="text-slate-200">Resumo:</strong> <span class="text-slate-300">${escapeText(ia.resumo)}</span></div>
+          ${ia.prazoPedido ? `<div><strong class="text-slate-200">Prazo Solicitado:</strong> <span class="text-slate-300">${escapeText(ia.prazoPedido)}</span></div>` : ''}
+          ${ia.motivoRevisao ? `<div class="p-2 rounded bg-amber-950/40 border border-amber-600/30 text-amber-300"><strong>Motivo de Revisão:</strong> ${escapeText(ia.motivoRevisao)}</div>` : ''}
+          ${faltaHtml ? `<div><strong class="text-slate-200">Informação em Falta:</strong><ul class="list-disc ml-4 text-slate-400">${faltaHtml}</ul></div>` : ''}
+          <div><strong class="text-slate-200 block mb-1">Itens Identificados no Catálogo:</strong><div class="space-y-1.5">${itensHtml || '<span class="text-slate-500">Nenhum</span>'}</div></div>
+        `;
+      } else {
+        iaContainer.innerHTML = `<span class="text-slate-500">Sem interpretação de IA registada.</span>`;
+      }
+
+      // Review Resolver Panel
+      const resolverPanel = document.getElementById('resolver-revisao-panel');
+      if (pedido.estadoProcessamento === 'necessita_revisao') {
+        resolverPanel.classList.remove('hidden');
+        renderLinhasRevisaoIniciais(pedido);
+      } else {
+        resolverPanel.classList.add('hidden');
+      }
+
+      // Proposal details card
+      const propCard = document.getElementById('detalhe-proposta-card');
+      if (pedido.propostaDetails) {
+        propCard.classList.remove('hidden');
+        const p = pedido.propostaDetails;
+        document.getElementById('detalhe-prop-numero').textContent = `${p.numero} • Total sem IVA: ${formatarMoeda(p.totalCentimos)}`;
+        document.getElementById('detalhe-prop-link').href = p.linkProposta;
+        document.getElementById('detalhe-prop-notif-status').textContent = p.notificacaoAluno?.estado || 'por_enviar';
+      } else {
+        propCard.classList.add('hidden');
+      }
+
+      document.getElementById('modal-pedido-detalhes').classList.remove('hidden');
+      document.getElementById('modal-pedido-detalhes').classList.add('flex');
+    };
+
+    window.fecharModalDetalhes = function() {
+      document.getElementById('modal-pedido-detalhes').classList.add('hidden');
+      document.getElementById('modal-pedido-detalhes').classList.remove('flex');
+    };
+
+    // Revision Resolution logic
+    function renderLinhasRevisaoIniciais(pedido) {
+      const container = document.getElementById('revisao-itens-inputs');
+      container.innerHTML = '';
+      const itensIniciais = pedido.interpretacaoIA?.itens || [];
+      if (itensIniciais.length > 0) {
+        itensIniciais.forEach(i => adicionarLinhaRevisao(i.catalogoId, i.quantidade || 1));
+      } else {
+        adicionarLinhaRevisao('iphone-18-pro', 1);
+      }
+      atualizarTotalRevisao();
+    }
+
+    window.adicionarLinhaRevisao = function(selectedId = '', qtd = 1) {
+      const container = document.getElementById('revisao-itens-inputs');
+      const row = document.createElement('div');
+      row.className = "flex items-center gap-2 revisao-item-row";
+
+      const selectOptions = catalogoCache.filter(c => c.ativo).map(c => `
+        <option value="${c.id}" ${c.id === selectedId ? 'selected' : ''}>${c.nome} (${formatarMoeda(c.precoUnitarioCentimos)}/${c.unidadeVenda})</option>
+      `).join('');
+
+      row.innerHTML = `
+        <select class="flex-1 px-3 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 text-xs item-select" onchange="atualizarTotalRevisao()">
+          ${selectOptions}
+        </select>
+        <input type="number" min="1" value="${qtd}" class="w-20 px-2 py-2 rounded-xl border border-slate-700 bg-slate-900 text-slate-100 text-xs font-mono text-center item-qtd" onchange="atualizarTotalRevisao()" oninput="atualizarTotalRevisao()">
+        <button type="button" onclick="this.parentElement.remove(); atualizarTotalRevisao();" class="text-rose-400 hover:text-rose-300 p-2 text-sm font-bold cursor-pointer">✕</button>
+      `;
+      container.appendChild(row);
+      atualizarTotalRevisao();
+    };
+
+    window.atualizarTotalRevisao = function() {
+      let total = 0;
+      document.querySelectorAll('.revisao-item-row').forEach(row => {
+        const id = row.querySelector('.item-select').value;
+        const qtd = parseInt(row.querySelector('.item-qtd').value, 10) || 0;
+        const itemCat = catalogoCache.find(c => c.id === id);
+        if (itemCat) total += qtd * itemCat.precoUnitarioCentimos;
+      });
+      document.getElementById('revisao-total-calculado').textContent = formatarMoeda(total);
+    };
+
+    window.aprovarPropostaRevisao = async function() {
+      if (!currentPedidoSelecionado) return;
+      const itens = [];
+      document.querySelectorAll('.revisao-item-row').forEach(row => {
+        const catalogoId = row.querySelector('.item-select').value;
+        const quantidade = parseInt(row.querySelector('.item-qtd').value, 10) || 1;
+        itens.push({ catalogoId, quantidade });
+      });
+
+      if (itens.length === 0) {
+        alert("Selecione pelo menos um item para aprovar a proposta.");
+        return;
+      }
+
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch(`/api/admin/pedidos/${currentPedidoSelecionado.id}/aprovar`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ itens })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Falha ao aprovar proposta");
+        }
+
+        alert("Proposta aprovada e criada com sucesso! Notificação enviada para o email do aluno.");
+        fecharModalDetalhes();
+        carregarPedidos();
+      } catch (err) {
+        alert(`Erro: ${err.message}`);
+      }
+    };
+
+    window.repetirInterpretacaoIA = async function() {
+      if (!currentPedidoSelecionado) return;
+      if (!confirm("Deseja reexecutar a análise do Gemini e recálculo da proposta para este pedido?")) return;
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch(`/api/admin/pedidos/${currentPedidoSelecionado.id}/reprocessar`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error("Falha ao reprocessar");
+        alert("Pedido reprocessado pela IA com sucesso.");
+        fecharModalDetalhes();
+        carregarPedidos();
+      } catch (err) {
+        alert(`Erro: ${err.message}`);
+      }
+    };
+
+    window.reenviarNotificacaoResend = async function() {
+      if (!currentPedidoSelecionado || !currentPedidoSelecionado.propostaDetails) return;
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch(`/api/admin/propostas/${currentPedidoSelecionado.propostaDetails.id}/reenviar-notificacao`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Falha ao reenviar notificação");
+        alert(`Resultado do reenvio: ${data.notificacao.estado}. Resend ID: ${data.notificacao.resendId || 'N/A'}`);
+        fecharModalDetalhes();
+        carregarPedidos();
+      } catch (err) {
+        alert(`Erro: ${err.message}`);
+      }
+    };
+
+    // ==============================================================
+    // CATÁLOGO LOGIC
+    // ==============================================================
+    async function carregarCatalogo() {
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch('/api/admin/catalogo', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error("Falha ao carregar catálogo");
+        catalogoCache = await res.json();
+        renderCatalogoCards(catalogoCache);
+      } catch (err) {
+        console.error("Erro ao carregar catálogo:", err);
+      }
+    }
+
+    function renderCatalogoCards(items) {
+      const container = document.getElementById('catalogo-cards-container');
+      container.innerHTML = items.map(c => `
+        <div class="rounded-2xl border ${c.ativo ? 'border-slate-800' : 'border-slate-800/40 opacity-60'} bg-[#121318] p-5 flex flex-col justify-between shadow-lg">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800 font-bold">${c.id}</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${c.ativo ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">
+                ${c.ativo ? 'Ativo' : 'Inativo'}
+              </span>
+            </div>
+            <h4 class="text-base font-bold text-white">${escapeText(c.nome)}</h4>
+            <p class="text-xs text-slate-400 mt-1 line-clamp-2">${escapeText(c.descricao)}</p>
+            ${c.condicoes ? `<p class="text-[11px] text-rose-300 font-mono mt-2">${escapeText(c.condicoes)}</p>` : ''}
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-500 uppercase font-mono">Preço sem IVA</span>
+              <div class="text-base font-black text-white font-mono">${formatarMoeda(c.precoUnitarioCentimos)} <span class="text-[11px] font-normal text-slate-400">/${c.unidadeVenda}</span></div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="editarItemCatalogo('${c.id}')" class="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition cursor-pointer">
+                Editar
+              </button>
+              <button onclick="toggleAtivoCatalogo('${c.id}')" class="px-3 py-1.5 rounded-lg text-xs font-semibold ${c.ativo ? 'border border-rose-800 bg-rose-950/40 text-rose-300 hover:bg-rose-900/60' : 'border border-emerald-800 bg-emerald-950/40 text-emerald-300 hover:bg-emerald-900/60'} transition cursor-pointer">
+                ${c.ativo ? 'Desativar' : 'Ativar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.abrirModalNovoItemCatalogo = function() {
+      document.getElementById('form-item-catalogo').reset();
+      document.getElementById('cat-id').readOnly = false;
+      document.getElementById('catalogo-modal-title').textContent = "Novo Item no Catálogo";
+      document.getElementById('modal-item-catalogo').classList.remove('hidden');
+      document.getElementById('modal-item-catalogo').classList.add('flex');
+    };
+
+    window.editarItemCatalogo = function(id) {
+      const item = catalogoCache.find(c => c.id === id);
+      if (!item) return;
+      document.getElementById('cat-id').value = item.id;
+      document.getElementById('cat-id').readOnly = true;
+      document.getElementById('cat-nome').value = item.nome;
+      document.getElementById('cat-unidade').value = item.unidadeVenda;
+      document.getElementById('cat-preco').value = (item.precoUnitarioCentimos / 100).toFixed(2);
+      document.getElementById('cat-descricao').value = item.descricao;
+      document.getElementById('cat-condicoes').value = item.condicoes || '';
+      document.getElementById('cat-ativo').checked = item.ativo;
+      document.getElementById('catalogo-modal-title').textContent = `Editar ${item.nome}`;
+      document.getElementById('modal-item-catalogo').classList.remove('hidden');
+      document.getElementById('modal-item-catalogo').classList.add('flex');
+    };
+
+    window.fecharModalCatalogo = function() {
+      document.getElementById('modal-item-catalogo').classList.add('hidden');
+      document.getElementById('modal-item-catalogo').classList.remove('flex');
+    };
+
+    window.salvarItemCatalogo = async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('cat-id').value.trim();
+      const nome = document.getElementById('cat-nome').value.trim();
+      const unidadeVenda = document.getElementById('cat-unidade').value;
+      const precoEuros = parseFloat(document.getElementById('cat-preco').value) || 0;
+      const descricao = document.getElementById('cat-descricao').value.trim();
+      const condicoes = document.getElementById('cat-condicoes').value.trim();
+      const ativo = document.getElementById('cat-ativo').checked;
+
+      const item = {
+        id,
+        nome,
+        unidadeVenda,
+        precoUnitarioCentimos: Math.round(precoEuros * 100),
+        descricao,
+        condicoes,
+        ativo,
+        moeda: 'EUR'
+      };
+
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch(`/api/admin/catalogo/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(item)
+        });
+        if (!res.ok) throw new Error("Erro ao guardar item no catálogo");
+        fecharModalCatalogo();
+        carregarCatalogo();
+      } catch (err) {
+        alert(`Erro: ${err.message}`);
+      }
+    };
+
+    window.toggleAtivoCatalogo = async function(id) {
+      const item = catalogoCache.find(c => c.id === id);
+      if (!item) return;
+      const novoAtivo = !item.ativo;
+      try {
+        const token = currentIdToken || (await currentUser?.getIdToken());
+        const res = await fetch(`/api/admin/catalogo/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ ...item, ativo: novoAtivo })
+        });
+        if (!res.ok) throw new Error("Erro ao alterar estado do item");
+        carregarCatalogo();
+      } catch (err) {
+        alert(`Erro: ${err.message}`);
+      }
+    };
+
+    // Utilities
+    function formatarMoeda(centimos) {
+      return new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' }).format(centimos / 100);
+    }
+
+    function escapeText(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    initFirebase();
+  </script>
+</body>
+</html>

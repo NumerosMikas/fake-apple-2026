@@ -914,6 +914,47 @@
     html:not(.dark) #chat-input::placeholder {
       color: #86868b !important;
     }
+    /* Pedido de Proposta Light Mode Styles */
+    html:not(.dark) #pedido-proposta {
+      background-color: #fbfbfd !important;
+      border-color: #e5e5ea !important;
+    }
+    html:not(.dark) #pedido-proposta .proposta-card {
+      background-color: #ffffff !important;
+      border-color: #e5e5ea !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    }
+    html:not(.dark) #pedido-proposta input,
+    html:not(.dark) #pedido-proposta textarea {
+      background-color: #f5f5f7 !important;
+      border-color: #d2d2d7 !important;
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #pedido-proposta input:focus,
+    html:not(.dark) #pedido-proposta textarea:focus {
+      background-color: #ffffff !important;
+      border-color: #9d173b !important;
+      box-shadow: 0 0 0 3px rgba(157, 23, 59, 0.12) !important;
+    }
+    html:not(.dark) #pedido-proposta input::placeholder,
+    html:not(.dark) #pedido-proposta textarea::placeholder {
+      color: #86868b !important;
+    }
+    html:not(.dark) #pedido-proposta label {
+      color: #1d1d1f !important;
+    }
+    html:not(.dark) #pedido-proposta .text-slate-400 {
+      color: #6e6e73 !important;
+    }
+    html:not(.dark) #pedido-proposta .text-slate-300 {
+      color: #424245 !important;
+    }
+    html:not(.dark) #pedido-proposta .bg-slate-900\/60,
+    html:not(.dark) #pedido-proposta .bg-slate-900 {
+      background-color: #f5f5f7 !important;
+      border-color: #e5e5ea !important;
+      color: #1d1d1f !important;
+    }
   </style>
 </head>
 <body class="bg-[#0a0a0c] text-slate-100 min-h-screen transition-colors duration-300 font-sans antialiased selection:bg-rose-500 selection:text-white">
@@ -953,6 +994,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span>
             Demonstração Cal.com
           </a>
+          <a href="#pedido-proposta" class="hover:text-slate-100 transition">Pedido de Proposta</a>
           <a href="#faq" class="hover:text-slate-100 transition">Perguntas Frequentes</a>
         </nav>
       </div>
@@ -1584,6 +1626,155 @@
   </section>
 
   <!-- ========================================================================= -->
+  <!-- 5.5. PEDIDO DE PROPOSTA SECTION (AI COMMERCIAL PROPOSAL ENGINE) -->
+  <!-- ========================================================================= -->
+  <section id="pedido-proposta" class="py-24 border-t border-slate-800 bg-[#0d0e14] relative overflow-hidden transition-colors duration-300">
+    <!-- Subtle ambient lighting -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-rose-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+          <span>Soluções Empresariais & Lotes</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">
+          Pedido de Proposta
+        </h2>
+        <p class="text-slate-400 mt-3 text-base max-w-2xl mx-auto leading-relaxed">
+          Indique as necessidades de equipamento e serviços para a sua equipa ou projeto. A nossa plataforma interpreta o seu pedido e calcula a proposta oficial com base no catálogo Apple Portugal.
+        </p>
+      </div>
+
+      <!-- Main Proposal Request Card -->
+      <div class="proposta-card bg-[#121318] border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl transition-all duration-300">
+        
+        <!-- Form Container -->
+        <form id="form-pedido-proposta" onsubmit="handlePedidoPropostaSubmit(event)" class="space-y-6" novalidate>
+          
+          <!-- Field 1: Nome -->
+          <div>
+            <label for="proposta-nome" class="block text-sm font-semibold text-slate-200 mb-2">
+              Nome <span class="text-rose-500 font-bold">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="proposta-nome" 
+              name="nome" 
+              required 
+              maxlength="150"
+              placeholder="O seu nome completo ou nome da empresa" 
+              class="w-full px-4 py-3.5 rounded-2xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition"
+            />
+          </div>
+
+          <!-- Field 2: Email -->
+          <div>
+            <label for="proposta-email" class="block text-sm font-semibold text-slate-200 mb-2">
+              Email <span class="text-rose-500 font-bold">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="proposta-email" 
+              name="email" 
+              required 
+              maxlength="150"
+              placeholder="exemplo@empresa.pt" 
+              class="w-full px-4 py-3.5 rounded-2xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition"
+            />
+          </div>
+
+          <!-- Field 3: Pedido -->
+          <div>
+            <label for="proposta-pedido" class="block text-sm font-semibold text-slate-200 mb-2">
+              Pedido <span class="text-rose-500 font-bold">*</span>
+            </label>
+            <textarea 
+              id="proposta-pedido" 
+              name="pedido" 
+              rows="6" 
+              required 
+              maxlength="5000"
+              placeholder="Descreva detalhadamente os produtos, quantidades e requisitos pretendidos.&#10;&#10;Exemplo: Gostaria de equipar a nossa equipa com 5 MacBook Pro M5 e 5 iPhone 18 Pro de 256GB, além de serviço de consultoria de integração e extensão de garantia AppleCare+..." 
+              class="w-full px-4 py-3.5 rounded-2xl bg-slate-900 border border-slate-700/80 text-white placeholder-slate-500 text-sm leading-relaxed focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition"
+            ></textarea>
+            <div class="flex items-center justify-between mt-1 text-[11px] text-slate-500">
+              <span>Especifique quantidades e modelos do catálogo para cálculo exato.</span>
+              <span id="pedido-char-count">0 / 5000</span>
+            </div>
+          </div>
+
+          <!-- Privacy Notice -->
+          <div class="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="leading-relaxed">
+              Os seus dados serão utilizados exclusivamente para analisar e responder ao seu pedido de proposta comercial.
+            </p>
+          </div>
+
+          <!-- Error Alert Box -->
+          <div id="proposta-error-box" class="hidden p-4 rounded-2xl bg-rose-950/40 border border-rose-500/40 text-rose-300 text-xs flex items-start gap-3">
+            <svg class="w-4 h-4 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="proposta-error-text">Por favor, verifique os campos preenchidos.</span>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              id="btn-submeter-proposta" 
+              class="w-full py-4 px-6 rounded-full bg-gradient-to-r from-rose-600 via-burgundy-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-sm shadow-xl shadow-rose-950/50 hover:shadow-rose-900/60 hover:scale-[1.01] active:scale-[0.99] transition duration-200 cursor-pointer flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              <span id="btn-submeter-spinner" class="hidden">
+                <svg class="animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+              </span>
+              <span id="btn-submeter-text">Pedir proposta</span>
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Success Confirmation Container (Hidden initially) -->
+        <div id="proposta-success-box" class="hidden py-8 px-4 text-center space-y-6">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto text-2xl shadow-lg">
+            ✓
+          </div>
+          <div class="space-y-2">
+            <h3 class="text-2xl font-bold text-white tracking-tight">
+              O seu pedido foi recebido com sucesso.
+            </h3>
+            <p class="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
+              O registo foi armazenado na base de dados oficial e a nossa equipa irá analisar o âmbito e calcular as condições aplicáveis.
+            </p>
+          </div>
+          <div class="inline-block p-3 rounded-2xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">
+            Referência do Pedido: <span id="proposta-success-id" class="text-rose-400 font-bold">ped_...</span>
+          </div>
+          <div class="pt-2">
+            <button 
+              type="button" 
+              onclick="resetPedidoPropostaForm()" 
+              class="px-6 py-2.5 rounded-full border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition cursor-pointer"
+            >
+              Submeter outro pedido
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
   <!-- 6. FAQ SECTION (ACCORDION) -->
   <!-- ========================================================================= -->
   <section id="faq" class="py-24 border-t border-slate-800 bg-[#0a0a0c]">
@@ -1706,6 +1897,10 @@
           <a href="#" class="hover:underline hover:text-slate-300">Política de Privacidade</a>
           <a href="#" class="hover:underline hover:text-slate-300">Termos de Utilização</a>
           <a href="#" class="hover:underline hover:text-slate-300">Vendas e Reembolsos</a>
+          <a href="/admin" class="hover:underline text-rose-400 font-semibold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+            Área de Administração &rarr;
+          </a>
         </div>
       </div>
     </div>
@@ -2469,6 +2664,144 @@
     }
 
     // -------------------------------------------------------------
+    // PEDIDO DE PROPOSTA: SUBMISSION & CLIENT VALIDATION
+    // -------------------------------------------------------------
+    let isSubmittingProposta = false;
+
+    async function handlePedidoPropostaSubmit(e) {
+      e.preventDefault();
+      if (isSubmittingProposta) return;
+
+      const nomeEl = document.getElementById('proposta-nome');
+      const emailEl = document.getElementById('proposta-email');
+      const pedidoEl = document.getElementById('proposta-pedido');
+      const errorBox = document.getElementById('proposta-error-box');
+      const errorText = document.getElementById('proposta-error-text');
+      const btn = document.getElementById('btn-submeter-proposta');
+      const btnText = document.getElementById('btn-submeter-text');
+      const btnSpinner = document.getElementById('btn-submeter-spinner');
+      const formEl = document.getElementById('form-pedido-proposta');
+      const successBox = document.getElementById('proposta-success-box');
+      const successId = document.getElementById('proposta-success-id');
+
+      // Hide previous error
+      errorBox?.classList.add('hidden');
+
+      const nome = nomeEl?.value?.trim() || '';
+      const email = emailEl?.value?.trim() || '';
+      const pedido = pedidoEl?.value?.trim() || '';
+
+      // Client-side validations
+      if (!nome) {
+        showPropostaError('O campo Nome é obrigatório.');
+        nomeEl?.focus();
+        return;
+      }
+      if (nome.length > 150) {
+        showPropostaError('O campo Nome não pode exceder 150 carateres.');
+        nomeEl?.focus();
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        showPropostaError('Por favor, introduza um endereço de e-mail com formato válido (ex: utilizador@dominio.pt).');
+        emailEl?.focus();
+        return;
+      }
+      if (email.length > 150) {
+        showPropostaError('O e-mail não pode exceder 150 carateres.');
+        emailEl?.focus();
+        return;
+      }
+
+      if (!pedido) {
+        showPropostaError('O campo Pedido é obrigatório. Por favor, descreva as suas necessidades.');
+        pedidoEl?.focus();
+        return;
+      }
+      if (pedido.length < 5) {
+        showPropostaError('O pedido deve conter uma descrição mais detalhada dos equipamentos ou serviços pretendidos.');
+        pedidoEl?.focus();
+        return;
+      }
+      if (pedido.length > 5000) {
+        showPropostaError('O texto do pedido não pode exceder 5000 carateres.');
+        pedidoEl?.focus();
+        return;
+      }
+
+      // Enter loading state (protect against duplicate clicks)
+      isSubmittingProposta = true;
+      if (btn) btn.disabled = true;
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+      if (btnText) btnText.textContent = 'A registar pedido...';
+
+      try {
+        const response = await fetch('/api/pedidos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nome, email, pedido })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Ocorreu um erro ao submeter o seu pedido. Por favor, tente novamente.');
+        }
+
+        // Real persistence confirmed: present exact success state required by specification
+        if (formEl && successBox) {
+          formEl.classList.add('hidden');
+          successBox.classList.remove('hidden');
+          if (successId && data.pedidoId) {
+            successId.textContent = data.pedidoId;
+          }
+        }
+      } catch (err) {
+        showPropostaError(err.message || 'Não foi possível ligar ao servidor. Verifique a sua ligação e tente novamente.');
+      } finally {
+        isSubmittingProposta = false;
+        if (btn) btn.disabled = false;
+        if (btnSpinner) btnSpinner.classList.add('hidden');
+        if (btnText) btnText.textContent = 'Pedir proposta';
+      }
+    }
+
+    function showPropostaError(msg) {
+      const errorBox = document.getElementById('proposta-error-box');
+      const errorText = document.getElementById('proposta-error-text');
+      if (errorBox && errorText) {
+        errorText.textContent = msg;
+        errorBox.classList.remove('hidden');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function resetPedidoPropostaForm() {
+      const formEl = document.getElementById('form-pedido-proposta');
+      const successBox = document.getElementById('proposta-success-box');
+      const errorBox = document.getElementById('proposta-error-box');
+      const charCount = document.getElementById('pedido-char-count');
+
+      if (formEl) {
+        formEl.reset();
+        formEl.classList.remove('hidden');
+      }
+      if (successBox) {
+        successBox.classList.add('hidden');
+      }
+      if (errorBox) {
+        errorBox.classList.add('hidden');
+      }
+      if (charCount) {
+        charCount.textContent = '0 / 5000';
+      }
+    }
+
+    // -------------------------------------------------------------
     // DARK / LIGHT THEME TOGGLE
     // -------------------------------------------------------------
     function applyTheme(isDark) {
@@ -2518,6 +2851,15 @@
       }
       renderFaqAccordion();
       initCalComScheduler();
+
+      // Realtime character counter for pedido de proposta
+      const pedidoEl = document.getElementById('proposta-pedido');
+      const charCountEl = document.getElementById('pedido-char-count');
+      if (pedidoEl && charCountEl) {
+        pedidoEl.addEventListener('input', () => {
+          charCountEl.textContent = `${pedidoEl.value.length} / 5000`;
+        });
+      }
     });
   </script>
 </body>

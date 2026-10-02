@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // Catalogo collection: readable by everyone, writable for catalog setup and admin management
+    match /catalogo/{catalogoId} {
+      allow read: if true;
+      allow write: if isValidId(catalogoId);
+    }
+
+    // Pedidos collection: proposal requests created and listed/managed by the application
+    match /pedidos/{pedidoId} {
+      allow read, write: if true;
+    }
+
+    // Propostas collection: proposals created, queried by token and managed by the application
+    match /propostas/{propostaId} {
+      allow read, write: if true;
+    }
+
+    // Admins collection
+    match /admins/{adminId} {
+      allow read, write: if isValidId(adminId);
+    }
+
+    // Default deny-all catch-all for any other collection
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

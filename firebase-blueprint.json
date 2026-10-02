@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "CatalogoItem": {
+      "title": "CatalogoItem",
+      "description": "Item do catálogo de produtos e serviços para cálculo de propostas",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nome": { "type": "string", "maxLength": 200 },
+        "descricao": { "type": "string", "maxLength": 1000 },
+        "unidadeVenda": { "type": "string", "enum": ["unidade", "hora", "pacote"] },
+        "precoUnitarioCentimos": { "type": "number" },
+        "moeda": { "type": "string", "enum": ["EUR"] },
+        "ativo": { "type": "boolean" },
+        "condicoes": { "type": "string", "maxLength": 1000 }
+      },
+      "required": ["id", "nome", "descricao", "unidadeVenda", "precoUnitarioCentimos", "moeda", "ativo"]
+    },
+    "Pedido": {
+      "title": "Pedido",
+      "description": "Pedido de proposta submetido pelo cliente",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nome": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "textoPedido": { "type": "string", "maxLength": 5000 },
+        "dataCriacao": { "type": "string" },
+        "dataAtualizacao": { "type": "string" },
+        "estadoProcessamento": {
+          "type": "string",
+          "enum": ["recebido", "em_analise", "necessita_revisao", "proposta_criada", "erro"]
+        },
+        "interpretacaoIA": { "type": "string" },
+        "informacaoEmFalta": { "type": "string" },
+        "motivoRevisao": { "type": "string", "maxLength": 1000 },
+        "propostaId": { "type": "string", "maxLength": 128 },
+        "errosProcessamento": { "type": "string" }
+      },
+      "required": ["id", "nome", "email", "textoPedido", "dataCriacao", "dataAtualizacao", "estadoProcessamento"]
+    },
+    "Proposta": {
+      "title": "Proposta",
+      "description": "Proposta calculada com preços do catálogo e link individual",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "numero": { "type": "string", "maxLength": 64 },
+        "pedidoId": { "type": "string", "maxLength": 128 },
+        "token": { "type": "string", "maxLength": 128 },
+        "dataCriacao": { "type": "string" },
+        "dataValidade": { "type": "string" },
+        "resumoAmbito": { "type": "string", "maxLength": 2000 },
+        "itens": { "type": "string" },
+        "totalCentimos": { "type": "number" },
+        "condicoes": { "type": "string" },
+        "linkProposta": { "type": "string", "maxLength": 500 },
+        "notificacaoAluno": { "type": "string" },
+        "propostaDemonstracao": { "type": "boolean" }
+      },
+      "required": ["id", "numero", "pedidoId", "token", "dataCriacao", "dataValidade", "resumoAmbito", "totalCentimos"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Registo de utilizadores autorizados para administração",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "enum": ["admin"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/catalogo/{catalogoId}": {
+      "schema": { "$ref": "#/entities/CatalogoItem" },
+      "description": "Catálogo de produtos e serviços ativos e inativos"
+    },
+    "/pedidos/{pedidoId}": {
+      "schema": { "$ref": "#/entities/Pedido" },
+      "description": "Pedidos de proposta submetidos"
+    },
+    "/propostas/{propostaId}": {
+      "schema": { "$ref": "#/entities/Proposta" },
+      "description": "Propostas comerciais emitidas"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Lista de administradores com acesso ao painel"
+    }
+  }
+}
